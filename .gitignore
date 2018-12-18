@@ -20,6 +20,7 @@
 
 # Idea
 .idea/
+src/main/java/localhost
 out/
 *.iml
 *.iws
