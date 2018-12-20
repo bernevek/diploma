@@ -1,7 +1,9 @@
 package com.diploma.configuration;
 
+import com.diploma.endpoint.LoginEndpoint;
+import com.diploma.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ws.WebServiceMessage;
 import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.soap.SoapMessage;
@@ -9,14 +11,19 @@ import org.springframework.ws.soap.SoapMessage;
 @Component
 public class GlobalEndpointInterceptor implements EndpointInterceptor {
 
+    @Autowired
+    LoginService loginService;
 
     @Override
     public boolean handleRequest(MessageContext messageContext, Object endpoint) throws Exception {
-        WebServiceMessage wsm = messageContext.getRequest();
-        SoapMessage sm = (SoapMessage) wsm;
-        System.out.println(sm.getDocument().getElementsByTagName("session").item(0).getTextContent());
-        System.out.println("Endpoint Request Handling");
-        return true;
+        System.out.println();
+        if (endpoint.toString().contains(LoginEndpoint.class.getSimpleName())) {
+            return true;
+        } else {
+            SoapMessage request = (SoapMessage) messageContext.getRequest();
+            String session = request.getDocument().getElementsByTagName("session").item(0).getTextContent();
+            return loginService.checkSession(session);
+        }
     }
 
     @Override
