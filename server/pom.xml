@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>diploma</artifactId>
+        <groupId>com.diploma</groupId>
+        <version>1.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <packaging>jar</packaging>
+
+    <name>server</name>
+    <artifactId>server</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
+                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <clearOutputDir>false</clearOutputDir>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--<repositories>-->
+    <!--<repository>-->
+    <!--<id>spring-snapshots</id>-->
+    <!--<name>Spring Snapshots</name>-->
+    <!--<url>https://repo.spring.io/snapshot</url>-->
+    <!--<snapshots>-->
+    <!--<enabled>true</enabled>-->
+    <!--</snapshots>-->
+    <!--</repository>-->
+    <!--<repository>-->
+    <!--<id>spring-milestones</id>-->
+    <!--<name>Spring Milestones</name>-->
+    <!--<url>https://repo.spring.io/milestone</url>-->
+    <!--<snapshots>-->
+    <!--<enabled>false</enabled>-->
+    <!--</snapshots>-->
+    <!--</repository>-->
+    <!--</repositories>-->
+
+    <!--<pluginRepositories>-->
+    <!--<pluginRepository>-->
+    <!--<id>spring-snapshots</id>-->
+    <!--<name>Spring Snapshots</name>-->
+    <!--<url>https://repo.spring.io/snapshot</url>-->
+    <!--<snapshots>-->
+    <!--<enabled>true</enabled>-->
+    <!--</snapshots>-->
+    <!--</pluginRepository>-->
+    <!--<pluginRepository>-->
+    <!--<id>spring-milestones</id>-->
+    <!--<name>Spring Milestones</name>-->
+    <!--<url>https://repo.spring.io/milestone</url>-->
+    <!--<snapshots>-->
+    <!--<enabled>false</enabled>-->
+    <!--</snapshots>-->
+    <!--</pluginRepository>-->
+    <!--</pluginRepositories>-->
+
+</project>

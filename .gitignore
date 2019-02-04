@@ -20,7 +20,7 @@
 
 # Idea
 .idea/
-src/main/java/localhost
+server/src/main/java/localhost
 out/
 *.iml
 *.iws
@@ -45,7 +45,7 @@ log/
 
 # dependencies
 *node_modules
-#client/node_modules
+#ui/node_modules
 
 # IDEs and editors
 .c9/
