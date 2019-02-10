@@ -46,6 +46,7 @@ log/
 # dependencies
 *node_modules
 #ui/node_modules
+#ui/build
 
 # IDEs and editors
 .c9/
