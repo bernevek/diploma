@@ -2,10 +2,10 @@ import React, {Component} from "react";
 import { connect } from 'react-redux';
 import Navbar from "react-bootstrap/Navbar"
 import Nav from "react-bootstrap/Nav"
-import NavDropdown from "react-bootstrap/NavDropdown"
 import FormControl from "react-bootstrap/FormControl"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
+import { history } from '../../store'
 
 
 export class AppNavbarHeader extends Component {
@@ -14,7 +14,7 @@ export class AppNavbarHeader extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
+
     }
 
     componentDidUpdate() {
@@ -23,6 +23,11 @@ export class AppNavbarHeader extends Component {
 
     componentWillUnmount() {
 
+    }
+
+    click = () => {
+        console.log("fsg");
+        history.push({pathname: "/userPolicy"})
     }
 
     render() {
@@ -34,12 +39,6 @@ export class AppNavbarHeader extends Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="#/userPolicy">User policy</Nav.Link>
                         <Nav.Link href="#/computerPolicy">Computer policy</Nav.Link>
-                        {/*<NavDropdown title="Dropdown" id="basic-nav-dropdown">*/}
-                            {/*<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>*/}
-                            {/*<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>*/}
-                            {/*<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>*/}
-                            {/*<NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>*/}
-                        {/*</NavDropdown>*/}
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2"/>

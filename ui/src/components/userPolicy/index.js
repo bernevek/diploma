@@ -3,7 +3,33 @@ import { connect } from 'react-redux';
 
 export class UserPolicy extends Component {
     state = {
-        user: undefined
+        userPolicy: {
+            name: "Default policy",
+            bannedApps: [
+                "WORD",
+                "NOTEPAD"
+            ],
+            bannedSites: [
+                "vk.com"
+            ],
+            loginMethods: [
+                "qwerty"
+            ],
+            enableRDP: false
+        },
+        applications: [
+            "WORD",
+            "NOTEPAD",
+            "EXEL"
+        ],
+        sites: [
+            "vk.com",
+            "facebook.com"
+        ],
+        loginMethods: [
+            "qwerty",
+            "12345698"
+        ]
     }
 
     componentDidMount() {
@@ -20,7 +46,15 @@ export class UserPolicy extends Component {
 
     render() {
         return (
-            <div>user policy</div>
+            <div className="container">
+                <h2>User policy: {this.state.userPolicy.name}</h2>
+                <h3>Banned apps</h3>
+                <hr/>
+                <h3>Banned sites</h3>
+                <hr/>
+                <h3>Login methods</h3>
+                <hr/>
+            </div>
         );
     }
 }
