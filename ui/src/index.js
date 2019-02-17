@@ -2,9 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom'
-import { ConnectedRouter } from 'connected-react-router';
-
-import store, { history } from './store'
+import store from './store'
 import App from './containers/app';
 
 import './index.css';

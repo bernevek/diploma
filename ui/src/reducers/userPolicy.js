@@ -19,7 +19,6 @@ export default function orgs(state = initialState, action={}) {
             return {
                 ...state,
                 errorMsg: null,
-                userPolicy: action.response.data,
                 saveUserPolicyInProgress: false,
             };
         case types.SAVE_USER_POLICY_FAIL:
