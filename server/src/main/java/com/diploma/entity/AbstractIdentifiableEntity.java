@@ -8,5 +8,5 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class AbstractIdentifiableEntity {
-    private Long id;
+    protected Long id;
 }

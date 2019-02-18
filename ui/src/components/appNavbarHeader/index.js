@@ -5,6 +5,7 @@ import Nav from "react-bootstrap/Nav"
 import FormControl from "react-bootstrap/FormControl"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
+import NavDropdown from "react-bootstrap/NavDropdown"
 import { history } from '../../store'
 
 
@@ -37,8 +38,16 @@ export class AppNavbarHeader extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#/userPolicy">User policy</Nav.Link>
-                        <Nav.Link href="#/computerPolicy">Computer policy</Nav.Link>
+                        <NavDropdown title="User" id="basic-nav-dropdown">
+                            <NavDropdown.Item href="#">Users</NavDropdown.Item>
+                            <NavDropdown.Item href="#/userPolicy">User policies</NavDropdown.Item>
+                        </NavDropdown>
+                        <NavDropdown title="Computer" id="basic-nav-dropdown">
+                            <NavDropdown.Item href="#">Computers</NavDropdown.Item>
+                            <NavDropdown.Item href="#/computerPolicy">Computer policies</NavDropdown.Item>
+                        </NavDropdown>
+                        <Nav.Link href="#">Applications</Nav.Link>
+                        <Nav.Link href="#">Sites</Nav.Link>
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2"/>

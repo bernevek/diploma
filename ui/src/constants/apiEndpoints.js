@@ -27,39 +27,39 @@ export const deleteUserPolicyUrl = (policyId) => {
 
 /* Applications */
 export const getApplicationsApi = () => {
-    return API_URL + "/applications";
+    return API_URL + "/application";
 }
 
 export const saveApplicationUrl = (applicationId) => {
-    return API_URL + "/applications/" + applicationId;
+    return API_URL + "/application/" + applicationId;
 }
 
 export const addApplicationUrl = () => {
-    return API_URL + "/applications";
+    return API_URL + "/application";
 }
 
 export const deleteApplicationUrl = (applicationId) => {
-    return API_URL + "/applications/" + applicationId;
+    return API_URL + "/application/" + applicationId;
 }
 
 /* Sites */
 export const getSitesApi = () => {
-    return API_URL + "/sites";
+    return API_URL + "/site";
 }
 
 export const saveSiteUrl = (sitesId) => {
-    return API_URL + "/sites/" + sitesId;
+    return API_URL + "/site/" + sitesId;
 }
 
 export const addSiteUrl = () => {
-    return API_URL + "/sites";
+    return API_URL + "/site";
 }
 
 export const deleteSiteUrl = (sitesId) => {
-    return API_URL + "/sites/" + sitesId;
+    return API_URL + "/site/" + sitesId;
 }
 
 /* Login methods*/
 export const getLoginMethodsApi = () => {
-    return API_URL + "/loginMethods";
+    return API_URL + "/loginMethod";
 }

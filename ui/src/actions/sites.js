@@ -30,28 +30,17 @@ export const addSiteFail = (errorMsg) => ({
     errorMsg,
 });
 
-// export function getSites(){
-//     return (dispatch) => {
-//         dispatch(getSitesStart());
-//         return axios.get(api.getSitesApi())
-//             .then(response => {
-//                 dispatch(getSitesSuccess(response));
-//             })
-//             .catch((error) => {
-//                 alert(JSON.parse(error.request.response).reason)
-//                 dispatch(getSitesFail(error.message));
-//             });
-//     }
-// }
-
 export function getSites(){
     return (dispatch) => {
         dispatch(getSitesStart());
-        dispatch(getSitesSuccess({data:[
-                {label: "vk", value: "vk.com"},
-                {label: "fb", value: "facebook.com"}
-            ]
-        }));
+        return axios.get(api.getSitesApi())
+            .then(response => {
+                dispatch(getSitesSuccess(response));
+            })
+            .catch((error) => {
+                alert(JSON.parse(error.request.response).reason)
+                dispatch(getSitesFail(error.message));
+            });
     }
 }
 

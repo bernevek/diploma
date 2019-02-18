@@ -30,29 +30,17 @@ export const addApplicationFail = (errorMsg) => ({
     errorMsg,
 });
 
-// export function getApplications(){
-//     return (dispatch) => {
-//         dispatch(getApplicationsStart());
-//         return axios.get(api.getApplicationsApi())
-//             .then(response => {
-//                 dispatch(getApplicationsSuccess(response));
-//             })
-//             .catch((error) => {
-//                 alert(JSON.parse(error.request.response).reason)
-//                 dispatch(getApplicationsFail(error.message));
-//             });
-//     }
-// }
-
 export function getApplications(){
     return (dispatch) => {
         dispatch(getApplicationsStart());
-        dispatch(getApplicationsSuccess({data:[
-                {label: "WORD", value: "word.exe"},
-                {label: "NOTEPAD", value: "notepad.exe"},
-                {label: "EXEL", value: "exel.exe"}
-            ]
-        }));
+        return axios.get(api.getApplicationsApi())
+            .then(response => {
+                dispatch(getApplicationsSuccess(response));
+            })
+            .catch((error) => {
+                alert(JSON.parse(error.request.response).reason)
+                dispatch(getApplicationsFail(error.message));
+            });
     }
 }
 
