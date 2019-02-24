@@ -14,9 +14,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "user_policy")
-public class UserPolicy extends Policy {
+@Table(name = "computer_policy")
+public class ComputerPolicy extends Policy {
 
-    @OneToMany(mappedBy = "userPolicy", cascade = CascadeType.REMOVE)
-    private List<User> users;
+    @OneToMany(mappedBy = "computerPolicy", cascade = CascadeType.REMOVE)
+    private List<Computer> computers;
 }
