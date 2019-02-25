@@ -1,6 +1,11 @@
 package com.diploma.service.impl;
 
+import com.diploma.DTO.UserPolicyDTO;
 import com.diploma.entity.UserPolicy;
+import com.diploma.repository.ApplicationRepository;
+import com.diploma.repository.LoginMethodRepository;
+import com.diploma.repository.SiteRepository;
+import com.diploma.repository.UserPolicyRepository;
 import com.diploma.service.ApplicationService;
 import com.diploma.service.LoginMethodService;
 import com.diploma.service.SiteService;
@@ -9,56 +14,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserPolicyServiceImpl implements UserPolicyService {
-    private Map<Long, UserPolicy> userPolicies = new HashMap<>();
-    private Long count = 0L;
 
     @Autowired
-    ApplicationService applicationService;
-    @Autowired
-    SiteService siteService;
-    @Autowired
-    LoginMethodService loginMethodService;
-
-    @PostConstruct
-    private void init() {
-        userPolicies.put(count, new UserPolicy(count++,
-                "Default User Policy",
-                applicationService.getApplications(),
-                siteService.getSites(),
-                loginMethodService.getLoginMethods()
-        ));
-    }
+    UserPolicyRepository userPolicyRepository;
 
     @Override
-    public void addUserPolicy(UserPolicy userPolicy) {
-        userPolicy.setId(count);
-        userPolicies.put(count++, userPolicy);
+    public void saveUserPolicy(UserPolicyDTO userPolicyDTO) {
+        userPolicyRepository.save(userPolicyDTO.getUserPolicy());
     }
 
     @Override
     public void deleteUserPolicy(Long userPolicyId) {
-        userPolicies.remove(userPolicyId);
+        userPolicyRepository.deleteById(userPolicyId);
     }
 
     @Override
-    public void editUserPolicy(Long userPolicyId, UserPolicy userPolicy) {
-        userPolicies.put(userPolicyId, userPolicy);
+    public UserPolicyDTO getUserPolicy(Long userPolicyId) {
+        Optional<UserPolicy> policy = userPolicyRepository.findById(userPolicyId);
+        return policy.isPresent() ? new UserPolicyDTO(policy.get()) : null;
     }
 
     @Override
-    public UserPolicy getUserPolicy(Long userPolicyId) {
-        return userPolicies.get(userPolicyId);
-    }
-
-    @Override
-    public List<UserPolicy> getUserPolicies() {
-        return new ArrayList<UserPolicy>(userPolicies.values());
+    public List<UserPolicyDTO> getUserPolicies() {
+        return userPolicyRepository.
+                findAll().
+                stream().
+                map(userPolicy -> new UserPolicyDTO(userPolicy)).
+                collect(Collectors.toList());
     }
 }

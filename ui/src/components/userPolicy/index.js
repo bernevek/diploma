@@ -9,7 +9,7 @@ export class UserPolicy extends Component {
     }
 
     componentDidMount() {
-        this.getPolicy(0);
+        this.getPolicy(1);
     }
 
     componentDidUpdate(prevProps) {

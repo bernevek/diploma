@@ -1,13 +1,13 @@
 package com.diploma.service;
 
+import com.diploma.DTO.UserPolicyDTO;
 import com.diploma.entity.UserPolicy;
 
 import java.util.List;
 
 public interface UserPolicyService {
-    void addUserPolicy(UserPolicy userPolicy);
+    void saveUserPolicy(UserPolicyDTO userPolicyDTO);
     void deleteUserPolicy(Long userPolicyId);
-    void editUserPolicy(Long userPolicyId, UserPolicy userPolicy);
-    UserPolicy getUserPolicy(Long userPolicyId);
-    List<UserPolicy> getUserPolicies();
+    UserPolicyDTO getUserPolicy(Long userPolicyId);
+    List<UserPolicyDTO> getUserPolicies();
 }

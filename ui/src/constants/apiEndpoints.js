@@ -14,7 +14,7 @@ export const getUserPolicyApi = (policyId) => {
 }
 
 export const saveUserPolicyUrl = (policyId) => {
-    return API_URL + "/userPolicy/" + policyId;
+    return API_URL + "/userPolicy";
 }
 
 export const addUserPolicyUrl = () => {
@@ -31,7 +31,7 @@ export const getApplicationsApi = () => {
 }
 
 export const saveApplicationUrl = (applicationId) => {
-    return API_URL + "/application/" + applicationId;
+    return API_URL + "/application";
 }
 
 export const addApplicationUrl = () => {
@@ -48,7 +48,7 @@ export const getSitesApi = () => {
 }
 
 export const saveSiteUrl = (sitesId) => {
-    return API_URL + "/site/" + sitesId;
+    return API_URL + "/site";
 }
 
 export const addSiteUrl = () => {

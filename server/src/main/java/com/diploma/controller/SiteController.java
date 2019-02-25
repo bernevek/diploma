@@ -1,5 +1,6 @@
 package com.diploma.controller;
 
+import com.diploma.DTO.ConfigElementDTO;
 import com.diploma.entity.Site;
 import com.diploma.service.SiteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class SiteController {
     SiteService siteService;
 
     @PostMapping("")
-    ResponseEntity<?> addSite(@RequestBody Site site) {
-        siteService.addSite(site);
+    ResponseEntity<?> addSite(@RequestBody ConfigElementDTO site) {
+        siteService.saveSite(site);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -26,9 +27,9 @@ public class SiteController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/{siteId}")
-    ResponseEntity<?> editSite(@PathVariable Long siteId, @RequestBody Site site) {
-        siteService.editSite(siteId, site);
+    @PutMapping("")
+    ResponseEntity<?> editSite(@RequestBody ConfigElementDTO site) {
+        siteService.saveSite(site);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

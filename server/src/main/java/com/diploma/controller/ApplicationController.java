@@ -1,5 +1,6 @@
 package com.diploma.controller;
 
+import com.diploma.DTO.ConfigElementDTO;
 import com.diploma.entity.Application;
 import com.diploma.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class ApplicationController {
     ApplicationService applicationService;
 
     @PostMapping("")
-    ResponseEntity<?> addApplication(@RequestBody Application application) {
-        applicationService.addApplication(application);
+    ResponseEntity<?> addApplication(@RequestBody ConfigElementDTO application) {
+        applicationService.saveApplication(application);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -26,9 +27,9 @@ public class ApplicationController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/{applicationId}")
-    ResponseEntity<?> editApplication(@PathVariable Long applicationId, @RequestBody Application application) {
-        applicationService.editApplication(applicationId, application);
+    @PutMapping("")
+    ResponseEntity<?> editApplication(@RequestBody ConfigElementDTO application) {
+        applicationService.saveApplication(application);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

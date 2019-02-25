@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "computer")
 public class Computer extends AbstractIdentifiableEntity{

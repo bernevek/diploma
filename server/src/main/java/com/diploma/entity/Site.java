@@ -11,18 +11,15 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "site")
-public class Site extends AbstractIdentifiableEntity {
+public class Site extends ConfigElement {
 
-    @NotNull
-    @Column(name = "label", nullable = false)
-    private String label;
-
-    @NotNull
-    @Column(name = "value", nullable = false)
-    private String value;
+    public Site(@NotNull String label, @NotNull String value) {
+        super(label, value);
+    }
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "bannedSites")
-    private List<Policy> policies;
+    private List<BasePolicy> policies;
 }

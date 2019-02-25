@@ -1,5 +1,6 @@
 package com.diploma.controller;
 
+import com.diploma.DTO.UserPolicyDTO;
 import com.diploma.entity.UserPolicy;
 import com.diploma.service.UserPolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,14 @@ public class UserPolicyController {
     }
 
     @PostMapping("/userPolicy")
-    ResponseEntity<?> addUserPolicy(@RequestBody UserPolicy userPolicy) {
-        userPolicyService.addUserPolicy(userPolicy);
+    ResponseEntity<?> addUserPolicy(@RequestBody UserPolicyDTO userPolicyDTO) {
+        userPolicyService.saveUserPolicy(userPolicyDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/userPolicy/{userPolicyId}")
-    ResponseEntity<?> editUserPolicy(@PathVariable Long userPolicyId, @RequestBody UserPolicy userPolicy) {
-        userPolicyService.editUserPolicy(userPolicyId, userPolicy);
+    @PutMapping("/userPolicy")
+    ResponseEntity<?> editUserPolicy(@RequestBody UserPolicyDTO userPolicyDTO) {
+        userPolicyService.saveUserPolicy(userPolicyDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -1,43 +1,37 @@
 package com.diploma.service.impl;
 
+import com.diploma.DTO.ConfigElementDTO;
 import com.diploma.entity.Application;
+import com.diploma.repository.ApplicationRepository;
 import com.diploma.service.ApplicationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService{
-    private Map<Long, Application> applications = new HashMap<>();
-    private Long count = 0L;
 
-    ApplicationServiceImpl() {
-        applications.put(count, new Application(count++,"WORD","word.exe"));
-        applications.put(count, new Application(count++,"NOTEPAD","notepad.exe"));
-        applications.put(count, new Application(count++,"EXEL","exel.exe"));
-    }
+    @Autowired
+    ApplicationRepository applicationRepository;
 
     @Override
-    public void addApplication(Application application) {
-        application.setId(count);
-        applications.put(count++, application);
+    public void saveApplication(ConfigElementDTO application) {
+        applicationRepository.save((Application) application.getConfigElement(new Application()));
     }
 
     @Override
     public void deleteApplication(Long applicationId) {
-        applications.remove(applicationId);
+        applicationRepository.deleteById(applicationId);
     }
 
     @Override
-    public void editApplication(Long applicationId, Application application) {
-        applications.put(applicationId, application);
-    }
-
-    @Override
-    public List<Application> getApplications() {
-        return new ArrayList<Application>(applications.values());
+    public List<ConfigElementDTO> getApplications() {
+        return applicationRepository.findAll().stream().map(application -> new ConfigElementDTO<>(application)).collect(Collectors.toList());
     }
 }

@@ -8,16 +8,30 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
-public abstract class Policy extends AbstractIdentifiableEntity {
+@NoArgsConstructor
+@Entity
+@Table(name = "base_policy")
+@Inheritance(
+        strategy = InheritanceType.JOINED
+)
+public abstract class BasePolicy extends AbstractIdentifiableEntity {
+
+    public BasePolicy(@NotNull String name, List<Application> bannedApps, List<Site> bannedSites, List<LoginMethod> loginMethods) {
+        this.name = name;
+        this.bannedApps = bannedApps;
+        this.bannedSites = bannedSites;
+        this.loginMethods = loginMethods;
+    }
 
     @NotNull
     @Column(name = "name", nullable = false)
     protected String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
     @JoinTable(
             name = "policy_apps",
             joinColumns = { @JoinColumn(name = "policy_id") },
@@ -25,7 +39,7 @@ public abstract class Policy extends AbstractIdentifiableEntity {
     )
     protected List<Application> bannedApps;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
     @JoinTable(
             name = "policy_sites",
             joinColumns = { @JoinColumn(name = "policy_id") },
@@ -33,7 +47,7 @@ public abstract class Policy extends AbstractIdentifiableEntity {
     )
     protected List<Site> bannedSites;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
     @JoinTable(
             name = "policy_login_methods",
             joinColumns = { @JoinColumn(name = "policy_id") },
