@@ -35,11 +35,11 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(messageDispatcherServlet, "/ws/*");
     }
 
-    @Bean(name = "user")
+    @Bean(name = "isecurity")
     public DefaultWsdl11Definition defaultWsdl11DefinitionUser(XsdSchema usersSchema) {
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
-        definition.setPortTypeName("UserPort");
-        definition.setTargetNamespace("http://localhost:8080/user");
+        definition.setPortTypeName("ISecurity");
+        definition.setTargetNamespace("http://localhost:8080/isecurity");
         definition.setLocationUri("/ws");
         definition.setSchema(usersSchema);
         return definition;
@@ -47,36 +47,6 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 
     @Bean
     public XsdSchema usersSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("wsdl/user.xsd"));
-    }
-
-    @Bean(name = "computer")
-    public DefaultWsdl11Definition defaultWsdl11DefinitionComputer(XsdSchema computersSchema) {
-        DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
-        definition.setPortTypeName("ComputerPort");
-        definition.setTargetNamespace("http://localhost:8080/computer");
-        definition.setLocationUri("/ws");
-        definition.setSchema(computersSchema);
-        return definition;
-    }
-
-    @Bean
-    public XsdSchema computersSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("wsdl/computer.xsd"));
-    }
-
-    @Bean(name = "login")
-    public DefaultWsdl11Definition defaultWsdl11DefinitionLogin(XsdSchema loginSchema) {
-        DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
-        definition.setPortTypeName("LoginPort");
-        definition.setTargetNamespace("http://localhost:8080/login");
-        definition.setLocationUri("/ws");
-        definition.setSchema(loginSchema);
-        return definition;
-    }
-
-    @Bean
-    public XsdSchema loginSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("wsdl/login.xsd"));
+        return new SimpleXsdSchema(new ClassPathResource("wsdl/isecurity.xsd"));
     }
 }

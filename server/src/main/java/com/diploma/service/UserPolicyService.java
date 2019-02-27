@@ -2,6 +2,7 @@ package com.diploma.service;
 
 import com.diploma.DTO.UserPolicyDTO;
 import com.diploma.entity.UserPolicy;
+import localhost._8080.isecurity.Policy;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ public interface UserPolicyService {
     void deleteUserPolicy(Long userPolicyId);
     UserPolicyDTO getUserPolicy(Long userPolicyId);
     List<UserPolicyDTO> getUserPolicies();
+    Policy getPolicyForAgent(String session);
 }
