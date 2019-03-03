@@ -34,4 +34,9 @@ public class ApplicationServiceImpl implements ApplicationService{
     public List<ConfigElementDTO> getApplications() {
         return applicationRepository.findAll().stream().map(application -> new ConfigElementDTO<>(application)).collect(Collectors.toList());
     }
+
+    @Override
+    public List<String> getApplicationsForAgent() {
+        return applicationRepository.findAll().stream().map(application -> application.getValue()).collect(Collectors.toList());
+    }
 }

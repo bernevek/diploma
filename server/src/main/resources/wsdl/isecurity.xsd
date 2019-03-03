@@ -100,4 +100,21 @@
         </xs:sequence>
     </xs:complexType>
 
+    <!--Apps-->
+    <xs:element name="GetAppsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="session" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetAppsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="apps" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema>

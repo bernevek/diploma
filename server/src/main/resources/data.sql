@@ -1,5 +1,5 @@
 INSERT INTO config_element(id, label, value)
-VALUES(1, "WORD", "word.exe"),
+VALUES(1, "WORD", "winword.exe"),
 (2, "NOTEPAD", "notepad.exe"),
 (3, "EXEL", "exel.exe"),
 (4, "password", "password"),

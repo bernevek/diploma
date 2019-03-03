@@ -9,4 +9,5 @@ public interface ApplicationService {
     void saveApplication(ConfigElementDTO application);
     void deleteApplication(Long applicationId);
     List<ConfigElementDTO> getApplications();
+    List<String> getApplicationsForAgent();
 }
