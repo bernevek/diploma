@@ -18,7 +18,7 @@ public class SiteController {
     @PostMapping("")
     ResponseEntity<?> addSite(@RequestBody ConfigElementDTO site) {
         siteService.saveSite(site);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(siteService.getSites(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{siteId}")

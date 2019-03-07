@@ -46,7 +46,7 @@ export class AppNavbarHeader extends Component {
                             <NavDropdown.Item href="#">Computers</NavDropdown.Item>
                             <NavDropdown.Item href="#/computerPolicy">Computer policies</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="#">Applications</Nav.Link>
+                        <Nav.Link href="#/applications">Applications</Nav.Link>
                         <Nav.Link href="#">Sites</Nav.Link>
                     </Nav>
                     <Form inline>

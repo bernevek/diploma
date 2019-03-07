@@ -18,7 +18,7 @@ public class ApplicationController {
     @PostMapping("")
     ResponseEntity<?> addApplication(@RequestBody ConfigElementDTO application) {
         applicationService.saveApplication(application);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(applicationService.getApplications(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{applicationId}")

@@ -5,6 +5,7 @@ import AppNavbarHeader from '../components/appNavbarHeader';
 import ComputerPolicy from '../components/computerPolicy';
 import UserPolicy from '../components/userPolicy';
 import app from '../App'
+import AppList from "../components/lists/appList";
 
 class App extends Component {
     render() {
@@ -14,6 +15,7 @@ class App extends Component {
                 <Route exact path="/" component={app}/>
                 <Route path="/computerPolicy/:computerPolicyId?" component={ComputerPolicy}/>
                 <Route path="/userPolicy/:userPolicyId?" component={UserPolicy}/>
+                <Route path="/applications" component={AppList}/>
             </div>
         );
     }
