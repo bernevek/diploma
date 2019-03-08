@@ -30,7 +30,7 @@ export const getApplicationsApi = () => {
     return API_URL + "/application";
 }
 
-export const saveApplicationUrl = (applicationId) => {
+export const updateApplicationUrl = () => {
     return API_URL + "/application";
 }
 

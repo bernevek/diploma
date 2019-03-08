@@ -6,7 +6,7 @@ import com.diploma.entity.Application;
 import java.util.List;
 
 public interface ApplicationService {
-    void saveApplication(ConfigElementDTO application);
+    ConfigElementDTO saveApplication(ConfigElementDTO application);
     void deleteApplication(Long applicationId);
     List<ConfigElementDTO> getApplications();
     List<String> getApplicationsForAgent();

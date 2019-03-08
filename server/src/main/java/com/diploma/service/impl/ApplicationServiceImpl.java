@@ -7,11 +7,7 @@ import com.diploma.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,8 +17,8 @@ public class ApplicationServiceImpl implements ApplicationService{
     ApplicationRepository applicationRepository;
 
     @Override
-    public void saveApplication(ConfigElementDTO application) {
-        applicationRepository.save((Application) application.getConfigElement(new Application()));
+    public ConfigElementDTO saveApplication(ConfigElementDTO application) {
+        return new ConfigElementDTO<Application>(applicationRepository.save((Application) application.getConfigElement(new Application())));
     }
 
     @Override

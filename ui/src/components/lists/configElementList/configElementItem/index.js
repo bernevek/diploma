@@ -20,6 +20,24 @@ export class ConfigElementItem extends Component {
             })
         }
     }
+    changeLabel = (e) => {
+        var value = e.target.value;
+        this.setState(prevState => ({
+            item: {
+                ...prevState.item,
+                label: value
+            }
+        }));
+    }
+    changeValue = (e) => {
+        var value = e.target.value;
+        this.setState(prevState => ({
+            item: {
+                ...prevState.item,
+                value: value
+            }
+        }));
+    }
     render() {
         return (
             <div className="row">
@@ -30,14 +48,7 @@ export class ConfigElementItem extends Component {
                                 type="text"
                                 className="form-control"
                                 defaultValue={this.state.item.label}
-                                onChange={(e) => {
-                                    this.setState(prevState => ({
-                                        item: {
-                                            ...prevState.item,
-                                            label: e.target.value
-                                        }
-                                    }));
-                                }}
+                                onChange={this.changeLabel}
                                 placeholder="Label"
                             />
                         ) : (
@@ -50,14 +61,7 @@ export class ConfigElementItem extends Component {
                                 type="text"
                                 className="form-control"
                                 defaultValue={this.state.item.value}
-                                onChange={(e) => {
-                                    this.setState(prevState => ({
-                                        item: {
-                                            ...prevState.item,
-                                            value: e.target.value
-                                        }
-                                    }));
-                                }}
+                                onChange={this.changeValue}
                                 placeholder="Value"
                             />
                         ) : (

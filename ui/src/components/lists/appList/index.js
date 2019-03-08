@@ -33,11 +33,11 @@ export class AppList extends Component {
     }
 
     updateApplication = (application) => {
-        // this.props.updateApplication(application);
+        this.props.updateApplication(application);
     }
 
     deleteApplication = (applicationId) => {
-        // this.props.deleteApplication(applicationId);
+        this.props.deleteApplication(applicationId);
     }
 
     render() {
@@ -65,6 +65,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         addApplication: (application) => {
             dispatch(applicationsActions.addApplication(application));
+        },
+        updateApplication: (application) => {
+            dispatch(applicationsActions.updateApplication(application));
+        },
+        deleteApplication: (applicationId) => {
+            dispatch(applicationsActions.deleteApplication(applicationId));
         }
     }
 }

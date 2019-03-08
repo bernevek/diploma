@@ -10,7 +10,7 @@ export function addApplication(application){
                 dispatch(addApplicationSuccess(response));
             })
             .catch((error) => {
-                alert(JSON.parse(error.request.response).reason)
+                alert(JSON.parse(error))
                 dispatch(addApplicationFail(error.message));
             });
     }
@@ -30,6 +30,64 @@ export const addApplicationFail = (errorMsg) => ({
     errorMsg,
 });
 
+export function updateApplication(application){
+    return (dispatch) => {
+        dispatch(updateApplicationStart());
+        return axios.put(api.updateApplicationUrl(), application)
+            .then(response => {
+                dispatch(updateApplicationSuccess(response));
+            })
+            .catch((error) => {
+                alert(JSON.parse(error))
+                dispatch(updateApplicationFail(error.message));
+            });
+    }
+}
+
+export const updateApplicationStart = () => ({
+    type: types.UPDATE_APPLICATION_START
+});
+
+export const updateApplicationSuccess = (response) => ({
+    type: types.UPDATE_APPLICATION_SUCCESS,
+    response
+});
+
+export const updateApplicationFail = (errorMsg) => ({
+    type: types.UPDATE_APPLICATION_FAIL,
+    errorMsg,
+});
+
+
+export function deleteApplication(applicationId){
+    return (dispatch) => {
+        dispatch(deleteApplicationStart());
+        return axios.delete(api.deleteApplicationUrl(applicationId))
+            .then(response => {
+                dispatch(deleteApplicationSuccess(response));
+            })
+            .catch((error) => {
+                console.log(error)
+                alert(JSON.parse(error))
+                dispatch(deleteApplicationFail(error.message));
+            });
+    }
+}
+
+export const deleteApplicationStart = () => ({
+    type: types.UPDATE_APPLICATION_START
+});
+
+export const deleteApplicationSuccess = (response) => ({
+    type: types.UPDATE_APPLICATION_SUCCESS,
+    response
+});
+
+export const deleteApplicationFail = (errorMsg) => ({
+    type: types.UPDATE_APPLICATION_FAIL,
+    errorMsg,
+});
+
 export function getApplications(){
     return (dispatch) => {
         dispatch(getApplicationsStart());
@@ -38,7 +96,7 @@ export function getApplications(){
                 dispatch(getApplicationsSuccess(response));
             })
             .catch((error) => {
-                alert(JSON.parse(error.request.response).reason)
+                alert(JSON.parse(error))
                 dispatch(getApplicationsFail(error.message));
             });
     }

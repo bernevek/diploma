@@ -17,20 +17,20 @@ public class ApplicationController {
 
     @PostMapping("")
     ResponseEntity<?> addApplication(@RequestBody ConfigElementDTO application) {
-        applicationService.saveApplication(application);
-        return new ResponseEntity<>(applicationService.getApplications(), HttpStatus.OK);
+        ConfigElementDTO savedApplication = applicationService.saveApplication(application);
+        return new ResponseEntity<>(savedApplication, HttpStatus.OK);
     }
 
     @DeleteMapping("/{applicationId}")
     ResponseEntity<?> deleteApplication(@PathVariable Long applicationId) {
         applicationService.deleteApplication(applicationId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(applicationId, HttpStatus.OK);
     }
 
     @PutMapping("")
     ResponseEntity<?> editApplication(@RequestBody ConfigElementDTO application) {
-        applicationService.saveApplication(application);
-        return new ResponseEntity<>(HttpStatus.OK);
+        ConfigElementDTO editedApplication = applicationService.saveApplication(application);
+        return new ResponseEntity<>(editedApplication, HttpStatus.OK);
     }
 
     @GetMapping("")
