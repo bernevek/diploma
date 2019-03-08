@@ -75,16 +75,16 @@ export function deleteApplication(applicationId){
 }
 
 export const deleteApplicationStart = () => ({
-    type: types.UPDATE_APPLICATION_START
+    type: types.DELETE_APPLICATION_START
 });
 
 export const deleteApplicationSuccess = (response) => ({
-    type: types.UPDATE_APPLICATION_SUCCESS,
+    type: types.DELETE_APPLICATION_SUCCESS,
     response
 });
 
 export const deleteApplicationFail = (errorMsg) => ({
-    type: types.UPDATE_APPLICATION_FAIL,
+    type: types.DELETE_APPLICATION_FAIL,
     errorMsg,
 });
 

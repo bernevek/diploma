@@ -74,7 +74,12 @@ export class ConfigElementItem extends Component {
                                 <button
                                     type="button"
                                     className="btn btn-md btn-success"
-                                    onClick={() => this.props.updateItem(this.state.item)}
+                                    onClick={() => {
+                                        this.props.updateItem(this.state.item);
+                                        this.setState({
+                                            edit: false
+                                        });
+                                    }}
                                 >
                                     Update
                                 </button>

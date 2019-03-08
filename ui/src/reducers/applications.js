@@ -59,7 +59,7 @@ export default function orgs(state = initialState, action={}) {
             return {
                 ...state,
                 errorMsg: null,
-                applications: [...state.applications.filter(app => app.id !== action.response.data.id)],
+                applications: [...state.applications.filter(app => app.id !== action.response.data)],
                 deleteApplicationInProgress: false,
             };
         case types.DELETE_APPLICATION_FAIL:
@@ -78,11 +78,12 @@ export default function orgs(state = initialState, action={}) {
             return {
                 ...state,
                 errorMsg: null,
-                applications: [...state.applications.forEach(app => {
+                applications: [...state.applications.map(app => {
                     if (app.id === action.response.data.id) {
                         app.label = action.response.data.label;
                         app.value = action.response.data.value;
                     }
+                    return app;
                 })],
                 updateApplicationInProgress: false,
             };
