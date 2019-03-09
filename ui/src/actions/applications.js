@@ -91,7 +91,7 @@ export const deleteApplicationFail = (errorMsg) => ({
 export function getApplications(){
     return (dispatch) => {
         dispatch(getApplicationsStart());
-        return axios.get(api.getApplicationsApi())
+        return axios.get(api.getApplicationsUrl())
             .then(response => {
                 dispatch(getApplicationsSuccess(response));
             })

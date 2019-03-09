@@ -3,6 +3,7 @@ import React, {Component} from "react";
 export class ConfigElementItem extends Component {
     state = {
         item: {
+            id: null,
             label: null,
             value: null
         },
@@ -40,8 +41,8 @@ export class ConfigElementItem extends Component {
     }
     render() {
         return (
-            <div className="row">
-                <li className="list-group-item">
+            <li className="list-group-item">
+                <div className="row">
                     <div className="col-md-4 col-xl-4 col-lg-4 col-sm-4 col-4">
                         {this.state.edit ? (
                             <input
@@ -119,8 +120,8 @@ export class ConfigElementItem extends Component {
                             </div>
                         )}
                     </div>
-                </li>
-            </div>
+                </div>
+            </li>
         )
     }
 }

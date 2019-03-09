@@ -28,3 +28,5 @@ VALUES(1, "Default user policy");
 INSERT IGNORE INTO user_policy(id)
 VALUES(1);
 
+INSERT IGNORE INTO user(id, login, password, user_policy_id)
+VALUES(1, "user", "password", 1);

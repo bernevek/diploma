@@ -5,7 +5,7 @@ import * as types from '../constants/actionsConstants';
 export function getLoginMethods(){
     return (dispatch) => {
         dispatch(getLoginMethodsStart());
-        return axios.get(api.getLoginMethodsApi())
+        return axios.get(api.getLoginMethodsUrl())
             .then(response => {
                 dispatch(getLoginMethodsSuccess(response));
             })

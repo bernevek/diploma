@@ -22,6 +22,7 @@ public class User extends AbstractIdentifiableEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private UserPolicy userPolicy;
 

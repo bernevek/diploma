@@ -5,15 +5,15 @@ process.env.REACT_APP_STAGE === 'dev'
     : API_URL = '/api'
 
 /* User Policy */
-export const getUserPoliciesApi = () => {
+export const getUserPoliciesUrl = () => {
     return API_URL + "/userPolicies";
 }
 
-export const getUserPolicyApi = (policyId) => {
+export const getUserPolicyUrl = (policyId) => {
     return API_URL + "/userPolicy/" + policyId;
 }
 
-export const saveUserPolicyUrl = (policyId) => {
+export const updateUserPolicyUrl = () => {
     return API_URL + "/userPolicy";
 }
 
@@ -26,7 +26,24 @@ export const deleteUserPolicyUrl = (policyId) => {
 }
 
 /* Applications */
-export const getApplicationsApi = () => {
+export const getUsersUrl = () => {
+    return API_URL + "/user";
+}
+
+export const updateUserUrl = () => {
+    return API_URL + "/user";
+}
+
+export const addUserUrl = () => {
+    return API_URL + "/user";
+}
+
+export const deleteUserUrl = (applicationId) => {
+    return API_URL + "/user/" + applicationId;
+}
+
+/* Applications */
+export const getApplicationsUrl = () => {
     return API_URL + "/application";
 }
 
@@ -43,7 +60,7 @@ export const deleteApplicationUrl = (applicationId) => {
 }
 
 /* Sites */
-export const getSitesApi = () => {
+export const getSitesUrl = () => {
     return API_URL + "/site";
 }
 
@@ -60,6 +77,6 @@ export const deleteSiteUrl = (sitesId) => {
 }
 
 /* Login methods*/
-export const getLoginMethodsApi = () => {
+export const getLoginMethodsUrl = () => {
     return API_URL + "/loginMethod";
 }

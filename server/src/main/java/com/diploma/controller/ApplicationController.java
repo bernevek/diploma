@@ -34,7 +34,7 @@ public class ApplicationController {
     }
 
     @GetMapping("")
-    ResponseEntity<?> getSites() {
+    ResponseEntity<?> getApplications() {
         return new ResponseEntity<>(applicationService.getApplications(), HttpStatus.OK);
     }
 }

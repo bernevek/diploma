@@ -26,6 +26,7 @@ export class ConfigElementList extends Component {
             }
         }));
     }
+
     render() {
         if (!this.props.configElements) {
             return (
@@ -35,55 +36,57 @@ export class ConfigElementList extends Component {
             )
         } else {
             return (
-                <div className="row">
-                    <div className="col-md-12 col-xl-12 col-lg-12 col-sm-12 col-12">
-                        <div className="row">
-                            <div className="col-md-12 col-xl-12 col-lg-12 col-sm-12 col-12">
-                                <br/>
-                                {this.props.name}
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12 col-xl-12 col-lg-12 col-sm-12 col-12">
+                            <div className="row">
+                                <div className="col-md-12 col-xl-12 col-lg-12 col-sm-12 col-12">
+                                    <br/>
+                                    {this.props.name}
+                                </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-4 col-xl-4 col-lg-4 col-sm-4 col-4">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    onChange={this.changeLabel}
-                                    placeholder="Label"
-                                />
+                            <div className="row">
+                                <div className="col-md-4 col-xl-4 col-lg-4 col-sm-4 col-4">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        onChange={this.changeLabel}
+                                        placeholder="Label"
+                                    />
+                                </div>
+                                <div className="col-md-4 col-xl-4 col-lg-4 col-sm-4 col-4">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        onChange={this.changeValue}
+                                        placeholder="Value"
+                                    />
+                                </div>
+                                <div className="col-md-4 col-xl-4 col-lg-4 col-sm-4 col-4">
+                                    <button
+                                        type="button"
+                                        className="btn btn-md btn-success"
+                                        onClick={() => this.props.addItem(this.state.item)}
+                                    >
+                                        Save
+                                    </button>
+                                </div>
                             </div>
-                            <div className="col-md-4 col-xl-4 col-lg-4 col-sm-4 col-4">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    onChange={this.changeValue}
-                                    placeholder="Value"
-                                />
-                            </div>
-                            <div className="col-md-4 col-xl-4 col-lg-4 col-sm-4 col-4">
-                                <button
-                                    type="button"
-                                    className="btn btn-md btn-success"
-                                    onClick={() => this.props.addItem(this.state.item)}
-                                >
-                                    Save
-                                </button>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-12 col-xl-12 col-lg-12 col-sm-12 col-12">
-                                <ul className="list-group">
-                                    {this.props.configElements.map((configElement, i) => {
-                                        return(
-                                            <div key={i}>
-                                                <ConfigElementItem
-                                                    item={configElement}
-                                                    updateItem={this.props.updateItem}
-                                                    deleteItem={this.props.deleteItem}/>
-                                            </div>
-                                        )
-                                    })}
-                                </ul>
+                            <div>
+                                <div>
+                                    <ul className="list-group">
+                                        {this.props.configElements.map((configElement, i) => {
+                                            return (
+                                                <div key={i}>
+                                                    <ConfigElementItem
+                                                        item={configElement}
+                                                        updateItem={this.props.updateItem}
+                                                        deleteItem={this.props.deleteItem}/>
+                                                </div>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

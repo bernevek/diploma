@@ -91,7 +91,7 @@ export const deleteSiteFail = (errorMsg) => ({
 export function getSites(){
     return (dispatch) => {
         dispatch(getSitesStart());
-        return axios.get(api.getSitesApi())
+        return axios.get(api.getSitesUrl())
             .then(response => {
                 dispatch(getSitesSuccess(response));
             })

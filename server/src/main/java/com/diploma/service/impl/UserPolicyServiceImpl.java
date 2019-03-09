@@ -1,6 +1,7 @@
 package com.diploma.service.impl;
 
 import com.diploma.DTO.UserPolicyDTO;
+import com.diploma.DTO.UserPolicyForListDTO;
 import com.diploma.entity.UserPolicy;
 import com.diploma.repository.ApplicationRepository;
 import com.diploma.repository.LoginMethodRepository;
@@ -41,11 +42,11 @@ public class UserPolicyServiceImpl implements UserPolicyService {
     }
 
     @Override
-    public List<UserPolicyDTO> getUserPolicies() {
+    public List<UserPolicyForListDTO> getUserPolicies() {
         return userPolicyRepository.
                 findAll().
                 stream().
-                map(userPolicy -> new UserPolicyDTO(userPolicy)).
+                map(userPolicy -> new UserPolicyForListDTO(userPolicy)).
                 collect(Collectors.toList());
     }
 

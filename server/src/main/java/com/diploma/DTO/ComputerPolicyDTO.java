@@ -4,6 +4,7 @@ import com.diploma.entity.Application;
 import com.diploma.entity.ComputerPolicy;
 import com.diploma.entity.LoginMethod;
 import com.diploma.entity.Site;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,6 +46,7 @@ public class ComputerPolicyDTO extends PolicyDTO{
                         collect(Collectors.toList()));
     }
 
+    @JsonIgnore
     public ComputerPolicy getComputerPolicy() {
         ComputerPolicy policy = new ComputerPolicy(this.getName(),
                 this.getBannedApps().

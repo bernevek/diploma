@@ -3,8 +3,10 @@ import * as types from "../constants/actionsConstants";
 const initialState = {
     errorMsg: null,
     userPolicy: null,
+    userPolicies: null,
     saveUserPolicyInProgress: false,
-    getUserPolicyInProgress: false
+    getUserPolicyInProgress: false,
+    getUserPoliciesInProgress: false,
 }
 
 export default function orgs(state = initialState, action={}) {
@@ -45,6 +47,25 @@ export default function orgs(state = initialState, action={}) {
                 ...state,
                 errorMsg: action.errorMsg,
                 getUserPolicyInProgress: false,
+            };
+        case types.GET_USER_POLICIES_START:
+            return {
+                ...state,
+                errorMsg: null,
+                getUserPoliciesInProgress: true
+            };
+        case types.GET_USER_POLICIES_SUCCESS:
+            return {
+                ...state,
+                errorMsg: null,
+                userPolicies: action.response.data,
+                getUserPoliciesInProgress: false,
+            };
+        case types.GET_USER_POLICIES_FAIL:
+            return {
+                ...state,
+                errorMsg: action.errorMsg,
+                getUserPoliciesInProgress: false,
             };
         default:
             return state;

@@ -17,13 +17,16 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class UserPolicyDTO extends PolicyDTO {
+    private List<UserDTO> users;
     public UserPolicyDTO(Long id,
                          String name,
                          List<ConfigElementDTO> bannedApps,
                          List<ConfigElementDTO> bannedSites,
-                         List<ConfigElementDTO> loginMethods
+                         List<ConfigElementDTO> loginMethods,
+                         List<UserDTO> users
     ) {
         super(id, name, bannedApps, bannedSites, loginMethods);
+        this.users = users;
     }
 
     public UserPolicyDTO(UserPolicy userPolicy) {
@@ -44,6 +47,7 @@ public class UserPolicyDTO extends PolicyDTO {
                         stream().
                         map(loginMethod -> new ConfigElementDTO<>(loginMethod)).
                         collect(Collectors.toList()));
+        this.users = userPolicy.getUsers().stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
     }
 
     @JsonIgnore

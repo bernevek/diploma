@@ -5,13 +5,15 @@ import userPolicy from './userPolicy';
 import applications from './applications';
 import sites from './sites';
 import loginMethods from './loginMethods';
+import users from './users';
 
 const appReducer = combineReducers({
     computerPolicy,
     userPolicy,
     applications,
     sites,
-    loginMethods
+    loginMethods,
+    users
 });
 const rootReducer = (state, action) => {
     if(action.type === 'LOGOUT'){

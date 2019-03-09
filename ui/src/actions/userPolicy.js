@@ -2,10 +2,39 @@ import axios from 'axios';
 import * as api from "../constants/apiEndpoints";
 import * as types from '../constants/actionsConstants';
 
+export function getUserPolicies(){
+    return (dispatch) => {
+        dispatch(getUserPoliciesStart());
+        return axios.get(api.getUserPoliciesUrl())
+            .then(response => {
+                dispatch(getUserPoliciesSuccess(response));
+            })
+            .catch((error) => {
+            console.log(error)
+                alert(JSON.parse(error.request.response).reason)
+                dispatch(getUserPoliciesFail(error.message));
+            });
+    }
+}
+
+export const getUserPoliciesStart = () => ({
+    type: types.GET_USER_POLICIES_START
+});
+
+export const getUserPoliciesSuccess = (response) => ({
+    type: types.GET_USER_POLICIES_SUCCESS,
+    response
+});
+
+export const getUserPoliciesFail = (errorMsg) => ({
+    type: types.GET_USER_POLICIES_FAIL,
+    errorMsg,
+});
+
 export function saveUserPolicy(userPolicy){
     return (dispatch) => {
         dispatch(saveUserPolicyStart());
-        return axios.put(api.saveUserPolicyUrl(userPolicy.id), userPolicy)
+        return axios.put(api.updateUserPolicyUrl(userPolicy.id), userPolicy)
             .then(response => {
                 dispatch(saveUserPolicySuccess(response));
             })
@@ -33,7 +62,7 @@ export const saveUserPolicyFail = (errorMsg) => ({
 export function getUserPolicy(userPolicyId){
     return (dispatch) => {
         dispatch(getUserPolicyStart());
-        return axios.get(api.getUserPolicyApi(userPolicyId))
+        return axios.get(api.getUserPolicyUrl(userPolicyId))
             .then(response => {
                 dispatch(getUserPolicySuccess(response));
             })
