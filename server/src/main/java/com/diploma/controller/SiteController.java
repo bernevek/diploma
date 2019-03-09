@@ -17,20 +17,20 @@ public class SiteController {
 
     @PostMapping("")
     ResponseEntity<?> addSite(@RequestBody ConfigElementDTO site) {
-        siteService.saveSite(site);
-        return new ResponseEntity<>(siteService.getSites(), HttpStatus.OK);
+        ConfigElementDTO savedSite = siteService.saveSite(site);
+        return new ResponseEntity<>(savedSite, HttpStatus.OK);
     }
 
     @DeleteMapping("/{siteId}")
     ResponseEntity<?> deleteSite(@PathVariable Long siteId) {
         siteService.deleteSite(siteId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(siteId, HttpStatus.OK);
     }
 
     @PutMapping("")
     ResponseEntity<?> editSite(@RequestBody ConfigElementDTO site) {
-        siteService.saveSite(site);
-        return new ResponseEntity<>(HttpStatus.OK);
+        ConfigElementDTO editedSite = siteService.saveSite(site);
+        return new ResponseEntity<>(editedSite, HttpStatus.OK);
     }
 
     @GetMapping("")

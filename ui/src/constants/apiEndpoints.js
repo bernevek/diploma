@@ -47,7 +47,7 @@ export const getSitesApi = () => {
     return API_URL + "/site";
 }
 
-export const saveSiteUrl = (sitesId) => {
+export const updateSiteUrl = () => {
     return API_URL + "/site";
 }
 

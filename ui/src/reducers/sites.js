@@ -6,6 +6,7 @@ const initialState = {
     addSiteInProgress: false,
     getSitesInProgress: false,
     deleteSiteInProgress: false,
+    updateSiteInProgress: false,
 }
 
 export default function orgs(state = initialState, action={}) {
@@ -21,7 +22,7 @@ export default function orgs(state = initialState, action={}) {
                 ...state,
                 errorMsg: null,
                 addSiteInProgress: false,
-                sites: action.response.data,
+                sites: [...state.sites, action.response.data]
             };
         case types.ADD_SITE_FAIL:
             return {
@@ -58,7 +59,7 @@ export default function orgs(state = initialState, action={}) {
             return {
                 ...state,
                 errorMsg: null,
-                sites: action.response.data,
+                sites: [...state.sites.filter(site => site.id !== action.response.data)],
                 deleteSiteInProgress: false,
             };
         case types.DELETE_SITE_FAIL:
@@ -66,6 +67,31 @@ export default function orgs(state = initialState, action={}) {
                 ...state,
                 errorMsg: action.errorMsg,
                 deleteSiteInProgress: false,
+            };
+        case types.UPDATE_SITE_START:
+            return {
+                ...state,
+                errorMsg: null,
+                updateSiteInProgress: true
+            };
+        case types.UPDATE_SITE_SUCCESS:
+            return {
+                ...state,
+                errorMsg: null,
+                sites: [...state.sites.map(site => {
+                    if (site.id === action.response.data.id) {
+                        site.label = action.response.data.label;
+                        site.value = action.response.data.value;
+                    }
+                    return site;
+                })],
+                updateSiteInProgress: false,
+            };
+        case types.UPDATE_SITE_FAIL:
+            return {
+                ...state,
+                errorMsg: action.errorMsg,
+                updateSiteInProgress: false,
             };
         default:
             return state;

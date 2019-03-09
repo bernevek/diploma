@@ -6,6 +6,7 @@ import ComputerPolicy from '../components/computerPolicy';
 import UserPolicy from '../components/userPolicy';
 import app from '../App'
 import AppList from "../components/lists/appList";
+import SiteList from "../components/lists/siteList";
 
 class App extends Component {
     render() {
@@ -16,6 +17,7 @@ class App extends Component {
                 <Route path="/computerPolicy/:computerPolicyId?" component={ComputerPolicy}/>
                 <Route path="/userPolicy/:userPolicyId?" component={UserPolicy}/>
                 <Route path="/applications" component={AppList}/>
+                <Route path="/sites" component={SiteList}/>
             </div>
         );
     }

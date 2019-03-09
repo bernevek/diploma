@@ -47,7 +47,7 @@ export class AppNavbarHeader extends Component {
                             <NavDropdown.Item href="#/computerPolicy">Computer policies</NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link href="#/applications">Applications</Nav.Link>
-                        <Nav.Link href="#">Sites</Nav.Link>
+                        <Nav.Link href="#/sites">Sites</Nav.Link>
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2"/>

@@ -21,8 +21,8 @@ public class SiteServiceImpl implements SiteService {
     SiteRepository siteRepository;
 
     @Override
-    public void saveSite(ConfigElementDTO site) {
-        siteRepository.save((Site) site.getConfigElement(new Site()));
+    public ConfigElementDTO saveSite(ConfigElementDTO site) {
+        return new ConfigElementDTO<Site>(siteRepository.save((Site) site.getConfigElement(new Site())));
     }
 
     @Override
