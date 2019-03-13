@@ -21,6 +21,6 @@ public class UserPolicy extends BasePolicy {
         super(name, bannedApps, bannedSites, loginMethods);
     }
 
-    @OneToMany(mappedBy = "userPolicy", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "userPolicy")
     private List<User> users;
 }

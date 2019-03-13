@@ -4,30 +4,69 @@ const initialState = {
     errorMsg: null,
     userPolicy: null,
     userPolicies: null,
-    saveUserPolicyInProgress: false,
+    updateUserPolicyInProgress: false,
     getUserPolicyInProgress: false,
     getUserPoliciesInProgress: false,
+    addUserPolicyInProgress: false,
+    deleteUserPolicyInProgress: false,
 }
 
 export default function orgs(state = initialState, action={}) {
     switch (action.type) {
-        case types.SAVE_USER_POLICY_START:
+        case types.UPDATE_USER_POLICY_START:
             return {
                 ...state,
                 errorMsg: null,
-                saveUserPolicyInProgress: true
+                updateUserPolicyInProgress: true
             };
-        case types.SAVE_USER_POLICY_SUCCESS:
+        case types.UPDATE_USER_POLICY_SUCCESS:
             return {
                 ...state,
                 errorMsg: null,
-                saveUserPolicyInProgress: false,
+                updateUserPolicyInProgress: false,
             };
-        case types.SAVE_USER_POLICY_FAIL:
+        case types.UPDATE_USER_POLICY_FAIL:
             return {
                 ...state,
                 errorMsg: action.errorMsg,
-                saveUserPolicyInProgress: false,
+                updateUserPolicyInProgress: false,
+            };
+        case types.ADD_USER_POLICY_START:
+            return {
+                ...state,
+                errorMsg: null,
+                addUserPolicyInProgress: true
+            };
+        case types.ADD_USER_POLICY_SUCCESS:
+            return {
+                ...state,
+                errorMsg: null,
+                addUserPolicyInProgress: false,
+            };
+        case types.ADD_USER_POLICY_FAIL:
+            return {
+                ...state,
+                errorMsg: action.errorMsg,
+                addUserPolicyInProgress: false,
+            };
+        case types.DELETE_USER_POLICY_START:
+            return {
+                ...state,
+                errorMsg: null,
+                deleteUserPolicyInProgress: true
+            };
+        case types.DELETE_USER_POLICY_SUCCESS:
+            return {
+                ...state,
+                errorMsg: null,
+                userPolicies: [...state.userPolicies.filter(userPolicy => userPolicy.value !== action.response.data)],
+                deleteUserPolicyInProgress: false,
+            };
+        case types.DELETE_USER_POLICY_FAIL:
+            return {
+                ...state,
+                errorMsg: action.errorMsg,
+                deleteUserPolicyInProgress: false,
             };
         case types.GET_USER_POLICY_START:
             return {

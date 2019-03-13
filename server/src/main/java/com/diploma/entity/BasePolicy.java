@@ -31,7 +31,7 @@ public abstract class BasePolicy extends AbstractIdentifiableEntity {
     @Column(name = "name", nullable = false)
     protected String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "policy_apps",
             joinColumns = { @JoinColumn(name = "policy_id") },
@@ -39,7 +39,7 @@ public abstract class BasePolicy extends AbstractIdentifiableEntity {
     )
     protected List<Application> bannedApps;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "policy_sites",
             joinColumns = { @JoinColumn(name = "policy_id") },
@@ -47,7 +47,7 @@ public abstract class BasePolicy extends AbstractIdentifiableEntity {
     )
     protected List<Site> bannedSites;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "policy_login_methods",
             joinColumns = { @JoinColumn(name = "policy_id") },

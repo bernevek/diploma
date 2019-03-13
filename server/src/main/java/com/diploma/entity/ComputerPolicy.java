@@ -21,10 +21,6 @@ public class ComputerPolicy extends BasePolicy  {
         super(name, bannedApps, bannedSites, loginMethods);
     }
 
-    @NotNull
-    @Column(name = "test_column", nullable = false)
-    protected String testColumn;
-
-    @OneToMany(mappedBy = "computerPolicy", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "computerPolicy")
     private List<Computer> computers;
 }

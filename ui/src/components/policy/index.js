@@ -4,6 +4,7 @@ import Select from 'react-select';
 import {getLoginMethods} from "../../actions/loginMethods";
 import {getApplications} from "../../actions/applications";
 import {getSites} from "../../actions/sites";
+import { Link } from "react-router-dom";
 
 
 export class Policy extends Component {
@@ -28,7 +29,18 @@ export class Policy extends Component {
             return (
                 <div className="container">
                     <div>
-                        <h2>{ this.props.policyType} policy: {this.props.policy.name}</h2>
+                        <h2>
+                            {this.props.policyType} policy:
+                            <input
+                                type="text"
+                                className="form-control"
+                                defaultValue={this.props.policy.name}
+                                onChange={(e) => {
+                                    this.props.setPolicyName(e.target.value);
+                                }}
+                                placeholder="Name"
+                            />
+                        </h2>
                         <h3>Banned apps</h3>
                         <Select isMulti options={this.props.applications}
                                 defaultValue={this.props.policy.bannedApps}
@@ -55,12 +67,7 @@ export class Policy extends Component {
                         <hr/>
                     </div>
                     <div>
-                        <button
-                            type="button"
-                            className="btn btn-md btn-outline-primary"
-                        >
-                            Cancel
-                        </button>
+                        <Link className="btn btn-md btn-outline-primary" to="/userPolicies">Cancel</Link>
                         &nbsp;
                         <button
                             type="button"

@@ -40,7 +40,7 @@ export class AppNavbarHeader extends Component {
                     <Nav className="mr-auto">
                         <NavDropdown title="User" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#/users">Users</NavDropdown.Item>
-                            <NavDropdown.Item href="#/userPolicy">User policies</NavDropdown.Item>
+                            <NavDropdown.Item href="#/userPolicies">User policies</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Computer" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#">Computers</NavDropdown.Item>

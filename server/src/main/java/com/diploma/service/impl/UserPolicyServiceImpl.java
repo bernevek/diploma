@@ -2,11 +2,9 @@ package com.diploma.service.impl;
 
 import com.diploma.DTO.UserPolicyDTO;
 import com.diploma.DTO.UserPolicyForListDTO;
+import com.diploma.entity.User;
 import com.diploma.entity.UserPolicy;
-import com.diploma.repository.ApplicationRepository;
-import com.diploma.repository.LoginMethodRepository;
-import com.diploma.repository.SiteRepository;
-import com.diploma.repository.UserPolicyRepository;
+import com.diploma.repository.*;
 import com.diploma.service.*;
 import localhost._8080.isecurity.Policy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,8 @@ public class UserPolicyServiceImpl implements UserPolicyService {
     UserPolicyRepository userPolicyRepository;
     @Autowired
     LoginServiceImpl loginService;
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public void saveUserPolicy(UserPolicyDTO userPolicyDTO) {
@@ -32,7 +32,21 @@ public class UserPolicyServiceImpl implements UserPolicyService {
 
     @Override
     public void deleteUserPolicy(Long userPolicyId) {
-        userPolicyRepository.deleteById(userPolicyId);
+        Optional<UserPolicy> userPolicyOptional = userPolicyRepository.findById(userPolicyId);
+        Optional<UserPolicy> defaultUserPolicyOptional = userPolicyRepository.findById(1L);
+        if (userPolicyId != 1L && userPolicyOptional.isPresent() && defaultUserPolicyOptional.isPresent()) {
+            userRepository.saveAll(userPolicyOptional.
+                                                get().
+                                                getUsers().
+                                                stream().
+                                                map(user -> {
+                                                    user.setUserPolicy(defaultUserPolicyOptional.get());
+                                                    return user;
+                                                }).
+                                                collect(Collectors.toList())
+            );
+            userPolicyRepository.deleteById(userPolicyId);
+        }
     }
 
     @Override

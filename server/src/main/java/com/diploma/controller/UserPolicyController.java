@@ -40,6 +40,6 @@ public class UserPolicyController {
     @DeleteMapping("/userPolicy/{userPolicyId}")
     ResponseEntity<?> deleteUserPolicy(@PathVariable Long userPolicyId) {
         userPolicyService.deleteUserPolicy(userPolicyId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(userPolicyId, HttpStatus.OK);
     }
 }

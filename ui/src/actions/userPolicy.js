@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as api from "../constants/apiEndpoints";
 import * as types from '../constants/actionsConstants';
+import { history } from '../store'
 
 export function getUserPolicies(){
     return (dispatch) => {
@@ -31,31 +32,89 @@ export const getUserPoliciesFail = (errorMsg) => ({
     errorMsg,
 });
 
-export function saveUserPolicy(userPolicy){
+export function updateUserPolicy(userPolicy){
     return (dispatch) => {
-        dispatch(saveUserPolicyStart());
-        return axios.put(api.updateUserPolicyUrl(userPolicy.id), userPolicy)
+        dispatch(updateUserPolicyStart());
+        return axios.put(api.updateUserPolicyUrl(), userPolicy)
             .then(response => {
-                dispatch(saveUserPolicySuccess(response));
+                dispatch(updateUserPolicySuccess(response));
+                history.push({pathname: "/userPolicies"})
             })
             .catch((error) => {
                 alert(JSON.parse(error.request.response).reason)
-                dispatch(saveUserPolicyFail(error.message));
+                dispatch(updateUserPolicyFail(error.message));
             });
     }
 }
 
-export const saveUserPolicyStart = () => ({
-    type: types.SAVE_USER_POLICY_START
+export const updateUserPolicyStart = () => ({
+    type: types.UPDATE_USER_POLICY_START
 });
 
-export const saveUserPolicySuccess = (response) => ({
-    type: types.SAVE_USER_POLICY_SUCCESS,
+export const updateUserPolicySuccess = (response) => ({
+    type: types.UPDATE_USER_POLICY_SUCCESS,
     response
 });
 
-export const saveUserPolicyFail = (errorMsg) => ({
-    type: types.SAVE_USER_POLICY_FAIL,
+export const updateUserPolicyFail = (errorMsg) => ({
+    type: types.UPDATE_USER_POLICY_FAIL,
+    errorMsg,
+});
+
+export function addUserPolicy(userPolicy){
+    return (dispatch) => {
+        dispatch(addUserPolicyStart());
+        return axios.post(api.addUserPolicyUrl(), userPolicy)
+            .then(response => {
+                dispatch(addUserPolicySuccess(response));
+                history.push({pathname: "/userPolicies"})
+            })
+            .catch((error) => {
+                alert(JSON.parse(error.request.response).reason)
+                dispatch(addUserPolicyFail(error.message));
+            });
+    }
+}
+
+export const addUserPolicyStart = () => ({
+    type: types.ADD_USER_POLICY_START
+});
+
+export const addUserPolicySuccess = (response) => ({
+    type: types.ADD_USER_POLICY_SUCCESS,
+    response
+});
+
+export const addUserPolicyFail = (errorMsg) => ({
+    type: types.ADD_USER_POLICY_FAIL,
+    errorMsg,
+});
+
+export function deleteUserPolicy(policyId){
+    return (dispatch) => {
+        dispatch(deleteUserPolicyStart());
+        return axios.delete(api.deleteUserPolicyUrl(policyId))
+            .then(response => {
+                dispatch(deleteUserPolicySuccess(response));
+            })
+            .catch((error) => {
+                alert(JSON.parse(error.request.response).reason)
+                dispatch(deleteUserPolicyFail(error.message));
+            });
+    }
+}
+
+export const deleteUserPolicyStart = () => ({
+    type: types.DELETE_USER_POLICY_START
+});
+
+export const deleteUserPolicySuccess = (response) => ({
+    type: types.DELETE_USER_POLICY_SUCCESS,
+    response
+});
+
+export const deleteUserPolicyFail = (errorMsg) => ({
+    type: types.DELETE_USER_POLICY_FAIL,
     errorMsg,
 });
 

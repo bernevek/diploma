@@ -5,11 +5,18 @@ import Policy from "../policy";
 
 export class UserPolicy extends Component {
     state = {
-        policy: null,
+        policy: {
+            name: "",
+            bannedApps: [],
+            bannedSites: [],
+            loginMethods: []
+        }
     }
 
     componentDidMount() {
-        this.getPolicy(1);
+        if (this.props.match.params.userPolicyId){
+            this.getPolicy(this.props.match.params.userPolicyId);
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -28,12 +35,16 @@ export class UserPolicy extends Component {
     }
 
     savePolicy = () => {
-        this.props.savePolicy(this.state.policy);
+        if (this.props.match.params.userPolicyId) {
+            this.props.updatePolicy(this.state.policy);
+        } else {
+            this.props.addPolicy(this.state.policy);
+        }
     }
 
     render() {
 
-        if (!this.state.policy) {
+        if (!this.state.policy && this.props.match.params.userPolicyId) {
             return (
                 <div className="container">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
@@ -42,6 +53,14 @@ export class UserPolicy extends Component {
         } else {
             return (
                 <Policy policyType = "User" policy={this.state.policy}
+                            setPolicyName={(name) => {
+                                this.setState(prevState => ({
+                                    policy: {
+                                        ...prevState.policy,
+                                        name: name
+                                    }
+                                }))
+                            }}
                             setBannedApps={(apps) => {
                                 this.setState(prevState => ({
                                     policy: {
@@ -83,8 +102,11 @@ const mapDispatchToProps = (dispatch) => {
         getPolicy: (policyId) => {
             dispatch(userPolicyActions.getUserPolicy(policyId));
         },
-        savePolicy: (policy) => {
-            dispatch(userPolicyActions.saveUserPolicy(policy));
+        updatePolicy: (policy) => {
+            dispatch(userPolicyActions.updateUserPolicy(policy));
+        },
+        addPolicy: (policy) => {
+            dispatch(userPolicyActions.addUserPolicy(policy));
         }
     }
 }
