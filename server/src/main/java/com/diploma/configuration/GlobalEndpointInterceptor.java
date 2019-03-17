@@ -16,7 +16,6 @@ public class GlobalEndpointInterceptor implements EndpointInterceptor {
 
     @Override
     public boolean handleRequest(MessageContext messageContext, Object endpoint) throws Exception {
-        System.out.println();
         if (endpoint.toString().contains(LoginEndpoint.class.getSimpleName())) {
             return true;
         } else {

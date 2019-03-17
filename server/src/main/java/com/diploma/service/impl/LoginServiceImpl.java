@@ -1,12 +1,16 @@
 package com.diploma.service.impl;
 
+import com.diploma.entity.User;
+import com.diploma.repository.UserRepository;
 import com.diploma.service.LoginService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -15,14 +19,22 @@ import java.util.concurrent.ConcurrentMap;
 @Setter
 @Service
 public class LoginServiceImpl implements LoginService {
+
+    @Autowired
+    private UserRepository userRepository;
+
     private ConcurrentMap<String, Ids> sessions = new ConcurrentHashMap<>();
 
     @Override
     public String loginPcUser(Long computerId, String login, String password) {
-        //check user in db
-        if (login.equals("1") && password.equals("1")) {
+        User user =userRepository.getUserByLoginAndPassword(login, password);
+        if (user != null) {
             String session = UUID.randomUUID().toString();
-            sessions.put(session, new Ids(1L, computerId));
+            Ids ids = new Ids(user.getId(), computerId, Instant.now().plusSeconds(400));
+            if (sessions.containsValue(ids)) {
+                sessions.entrySet().stream().filter(stringIdsEntry -> !stringIdsEntry.getValue().equals(ids));
+            }
+            sessions.put(session, ids);
             return session;
         } else {
             return "";
@@ -31,7 +43,12 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Boolean checkSession(String session) {
-        return !session.equals("");
+        if (sessions.containsKey(session) && sessions.get(session).getInstant().isAfter(Instant.now())) {
+            sessions.get(session).setInstant(Instant.now().plusSeconds(400));
+            return true;
+        } else
+            sessions.remove(session);
+            return false;
     }
 
     @Getter
@@ -41,6 +58,7 @@ public class LoginServiceImpl implements LoginService {
     public class Ids {
         private Long userId;
         private Long computerId;
+        private Instant instant;
 
         @Override
         public boolean equals(Object o) {

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class User extends AbstractIdentifiableEntity {
 
     @NotNull
-    @Column(name = "login", nullable = false)
+    @Column(name = "login", nullable = false, unique = true)
     private String login;
 
     @NotNull

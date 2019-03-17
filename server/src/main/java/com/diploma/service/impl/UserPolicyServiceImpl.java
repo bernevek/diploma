@@ -10,7 +10,6 @@ import localhost._8080.isecurity.Policy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -68,9 +67,7 @@ public class UserPolicyServiceImpl implements UserPolicyService {
     @Transactional
     public Policy getPolicyForAgent(String session) {
         Long userId = loginService.getSessions().get(session).getUserId();
-//        todo
-//        get policy by user and computer id
-        Optional<UserPolicy> optionalUserPolicy = userPolicyRepository.findById(userId);
+        Optional<UserPolicy> optionalUserPolicy = userPolicyRepository.findUserPolicyByUserId(userId);
         if (optionalUserPolicy.isPresent()) {
             UserPolicy userPolicy = optionalUserPolicy.get();
             Policy policy = new Policy();
