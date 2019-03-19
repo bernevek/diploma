@@ -18,7 +18,8 @@ export class Policy extends Component {
     render() {
         if (!this.props.applications ||
             !this.props.sites ||
-            !this.props.loginMethods
+            !this.props.loginMethods ||
+            !this.props.policy
         ) {
             return (
                 <div className="container">

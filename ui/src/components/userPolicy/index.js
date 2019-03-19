@@ -5,12 +5,7 @@ import Policy from "../policy";
 
 export class UserPolicy extends Component {
     state = {
-        policy: {
-            name: "",
-            bannedApps: [],
-            bannedSites: [],
-            loginMethods: []
-        }
+        policy: null
     }
 
     componentDidMount() {
