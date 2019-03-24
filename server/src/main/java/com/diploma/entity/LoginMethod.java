@@ -21,5 +21,5 @@ public class LoginMethod extends ConfigElement {
     }
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "loginMethods")
-    private List<BasePolicy> policies;
+    private List<UserPolicy> policies;
 }

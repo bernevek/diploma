@@ -17,6 +17,9 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class UserPolicyDTO extends PolicyDTO {
+    private List<ConfigElementDTO> bannedApps;
+    private List<ConfigElementDTO> bannedSites;
+    private List<ConfigElementDTO> loginMethods;
     private List<UserDTO> users;
     public UserPolicyDTO(Long id,
                          String name,
@@ -25,28 +28,30 @@ public class UserPolicyDTO extends PolicyDTO {
                          List<ConfigElementDTO> loginMethods,
                          List<UserDTO> users
     ) {
-        super(id, name, bannedApps, bannedSites, loginMethods);
+        super(id, name);
+        this.bannedApps = bannedApps;
+        this.bannedSites = bannedSites;
+        this.loginMethods = loginMethods;
         this.users = users;
     }
 
     public UserPolicyDTO(UserPolicy userPolicy) {
-        super(userPolicy.getId(),
-                userPolicy.getName(),
-                userPolicy.
+        super(userPolicy.getId(), userPolicy.getName());
+        this.bannedApps = userPolicy.
                         getBannedApps().
                         stream().
                         map(application -> new ConfigElementDTO<>(application)).
-                        collect(Collectors.toList()),
-                userPolicy.
+                        collect(Collectors.toList());
+        this.bannedSites = userPolicy.
                         getBannedSites().
                         stream().
                         map(site -> new ConfigElementDTO<>(site)).
-                        collect(Collectors.toList()),
-                userPolicy.
+                        collect(Collectors.toList());
+        this.loginMethods = userPolicy.
                         getLoginMethods().
                         stream().
                         map(loginMethod -> new ConfigElementDTO<>(loginMethod)).
-                        collect(Collectors.toList()));
+                        collect(Collectors.toList());
         this.users = userPolicy.getUsers().stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
     }
 

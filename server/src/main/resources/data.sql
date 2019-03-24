@@ -23,10 +23,14 @@ VALUES(6),
 (8);
 
 INSERT IGNORE INTO base_policy(id, name)
-VALUES(1, "Default user policy");
+VALUES(1, "Default user policy"),
+(2, "Default computer policy");
 
 INSERT IGNORE INTO user_policy(id)
 VALUES(1);
+
+INSERT IGNORE INTO computer_policy(id)
+VALUES(2);
 
 INSERT IGNORE INTO user(id, login, password, user_policy_id)
 VALUES(1, "user", "password", 1);

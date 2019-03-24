@@ -21,5 +21,5 @@ public class Site extends ConfigElement {
     }
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "bannedSites")
-    private List<BasePolicy> policies;
+    private List<UserPolicy> policies;
 }

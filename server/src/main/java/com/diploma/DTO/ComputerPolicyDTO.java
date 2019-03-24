@@ -1,9 +1,6 @@
 package com.diploma.DTO;
 
-import com.diploma.entity.Application;
-import com.diploma.entity.ComputerPolicy;
-import com.diploma.entity.LoginMethod;
-import com.diploma.entity.Site;
+import com.diploma.entity.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,49 +14,31 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class ComputerPolicyDTO extends PolicyDTO{
+    private List<ConfigElementDTO> services;
+//    private List<ComputerDTO> computers;
     public ComputerPolicyDTO(Long id,
                              String name,
-                             List<ConfigElementDTO> bannedApps,
-                             List<ConfigElementDTO> bannedSites,
-                             List<ConfigElementDTO> loginMethods
+                             List<ConfigElementDTO> services
     ) {
-        super(id, name, bannedApps, bannedSites, loginMethods);
+        super(id, name);
+        this.services = services;
     }
 
     public ComputerPolicyDTO(ComputerPolicy computerPolicy) {
-        super(computerPolicy.getId(),
-                computerPolicy.getName(),
-                computerPolicy.
-                        getBannedApps().
+        super(computerPolicy.getId(), computerPolicy.getName());
+        this.services = computerPolicy.
+                        getServices().
                         stream().
-                        map(application -> new ConfigElementDTO<>(application)).
-                        collect(Collectors.toList()),
-                computerPolicy.
-                        getBannedSites().
-                        stream().
-                        map(site -> new ConfigElementDTO<>(site)).
-                        collect(Collectors.toList()),
-                computerPolicy.
-                        getLoginMethods().
-                        stream().
-                        map(loginMethod -> new ConfigElementDTO<>(loginMethod)).
-                        collect(Collectors.toList()));
+                        map(service -> new ConfigElementDTO<>(service)).
+                        collect(Collectors.toList());
     }
 
     @JsonIgnore
     public ComputerPolicy getComputerPolicy() {
         ComputerPolicy policy = new ComputerPolicy(this.getName(),
-                this.getBannedApps().
+                this.getServices().
                         stream().
-                        map(configElementDTO -> (Application) configElementDTO.getConfigElement(new Application())).
-                        collect(Collectors.toList()),
-                this.getBannedSites().
-                        stream().
-                        map(configElementDTO -> (Site) configElementDTO.getConfigElement(new Site())).
-                        collect(Collectors.toList()),
-                this.getLoginMethods().
-                        stream().
-                        map(configElementDTO -> (LoginMethod) configElementDTO.getConfigElement(new LoginMethod())).
+                        map(configElementDTO -> (Service) configElementDTO.getConfigElement(new Service())).
                         collect(Collectors.toList()));
         policy.setId(this.getId());
         return policy;

@@ -17,7 +17,4 @@ import java.util.List;
 public class PolicyDTO {
     private Long id;
     private String name;
-    private List<ConfigElementDTO> bannedApps;
-    private List<ConfigElementDTO> bannedSites;
-    private List<ConfigElementDTO> loginMethods;
 }

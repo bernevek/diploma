@@ -21,5 +21,5 @@ public class Application extends ConfigElement {
     }
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "bannedApps")
-    private List<BasePolicy> policies;
+    private List<UserPolicy> policies;
 }
