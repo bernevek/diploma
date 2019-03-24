@@ -26,7 +26,7 @@ public class UserDTO {
         this.password = user.getPassword();
         this.userPolicyId = user.getUserPolicy().getId();
         if (user.getComputer() != null){
-            this.computerName = user.getComputer().getName();
+            this.computerName = user.getComputer().getComputerName();
         } else {
             this.computerName = null;
         }

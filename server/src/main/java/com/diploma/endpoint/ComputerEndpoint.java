@@ -1,8 +1,8 @@
 package com.diploma.endpoint;
 
-import localhost._8080.isecurity.ComputerDetails;
-import localhost._8080.isecurity.GetComputerDetailsRequest;
-import localhost._8080.isecurity.GetComputerDetailsResponse;
+import com.diploma.service.ComputerService;
+import localhost._8080.isecurity.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -10,14 +10,15 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
 public class ComputerEndpoint {
-    @PayloadRoot(namespace = "http://localhost:8080/isecurity", localPart = "GetComputerDetailsRequest")
+
+    @Autowired
+    ComputerService computerService;
+
+    @PayloadRoot(namespace = "http://localhost:8080/isecurity", localPart = "SendComputerDetailsRequest")
     @ResponsePayload
-    public GetComputerDetailsResponse processComputerDetailRequest(@RequestPayload GetComputerDetailsRequest request) {
-        GetComputerDetailsResponse response = new GetComputerDetailsResponse();
-        ComputerDetails computerDetails = new ComputerDetails();
-        computerDetails.setId(request.getId());
-        computerDetails.setIp("192.168.20.20");
-        response.setComputerDetails(computerDetails);
+    public SendComputerDetailsResponse processComputerDetailRequest(@RequestPayload SendComputerDetailsRequest request) {
+        SendComputerDetailsResponse response = new SendComputerDetailsResponse();
+        response.setComputerDetails(computerService.saveComputer(request.getComputerDetails()));
         return response;
     }
 }

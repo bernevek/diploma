@@ -1,5 +1,6 @@
 package com.diploma.configuration;
 
+import com.diploma.endpoint.ComputerEndpoint;
 import com.diploma.endpoint.LoginEndpoint;
 import com.diploma.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,8 @@ public class GlobalEndpointInterceptor implements EndpointInterceptor {
 
     @Override
     public boolean handleRequest(MessageContext messageContext, Object endpoint) throws Exception {
-        if (endpoint.toString().contains(LoginEndpoint.class.getSimpleName())) {
+        if (endpoint.toString().contains(LoginEndpoint.class.getSimpleName()) ||
+                endpoint.toString().contains(ComputerEndpoint.class.getSimpleName())) {
             return true;
         } else {
             SoapMessage request = (SoapMessage) messageContext.getRequest();

@@ -16,16 +16,16 @@ import javax.validation.constraints.NotNull;
 public class Computer extends AbstractIdentifiableEntity{
 
     @NotNull
-    @Column(name = "name", nullable = false, unique = true)
-    private String name;
+    @Column(name = "local_id", nullable = false, unique = true)
+    private Long localId;
 
     @NotNull
-    @Column(name = "login", nullable = false)
-    private String login;
+    @Column(name = "computer_name", nullable = false)
+    private String computerName;
 
     @NotNull
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Column(name = "local_user_name", nullable = false)
+    private String localUserName;
 
     @NotNull
     @Column(name = "ip", nullable = false)
