@@ -17,11 +17,10 @@ import java.util.Set;
 @Table(name = "user_policy")
 public class UserPolicy extends BasePolicy {
 
-    public UserPolicy(@NotNull String name, List<Application> bannedApps, List<Site> bannedSites, List<LoginMethod> loginMethods) {
+    public UserPolicy(@NotNull String name, List<Application> bannedApps, List<Site> bannedSites) {
         super(name);
         this.bannedApps = bannedApps;
         this.bannedSites = bannedSites;
-        this.loginMethods = loginMethods;
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -39,14 +38,6 @@ public class UserPolicy extends BasePolicy {
             inverseJoinColumns = { @JoinColumn(name = "site_id") }
     )
     protected List<Site> bannedSites;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "policy_login_methods",
-            joinColumns = { @JoinColumn(name = "policy_id") },
-            inverseJoinColumns = { @JoinColumn(name = "login_method_id") }
-    )
-    protected List<LoginMethod> loginMethods;
 
     @OneToMany(mappedBy = "userPolicy")
     private List<User> users;

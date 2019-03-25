@@ -1,8 +1,8 @@
 package com.diploma.service.impl;
 
 import com.diploma.DTO.UserPolicyDTO;
-import com.diploma.DTO.UserPolicyForListDTO;
-import com.diploma.entity.User;
+import com.diploma.DTO.PolicyForListDTO;
+import com.diploma.entity.ComputerPolicy;
 import com.diploma.entity.UserPolicy;
 import com.diploma.repository.*;
 import com.diploma.service.*;
@@ -19,6 +19,8 @@ public class UserPolicyServiceImpl implements UserPolicyService {
 
     @Autowired
     UserPolicyRepository userPolicyRepository;
+    @Autowired
+    ComputerPolicyRepository computerPolicyRepository;
     @Autowired
     LoginServiceImpl loginService;
     @Autowired
@@ -55,11 +57,11 @@ public class UserPolicyServiceImpl implements UserPolicyService {
     }
 
     @Override
-    public List<UserPolicyForListDTO> getUserPolicies() {
+    public List<PolicyForListDTO> getUserPolicies() {
         return userPolicyRepository.
                 findAll().
                 stream().
-                map(userPolicy -> new UserPolicyForListDTO(userPolicy)).
+                map(userPolicy -> new PolicyForListDTO(userPolicy)).
                 collect(Collectors.toList());
     }
 
@@ -67,12 +69,12 @@ public class UserPolicyServiceImpl implements UserPolicyService {
     @Transactional
     public Policy getPolicyForAgent(String session) {
         Long userId = loginService.getSessions().get(session).getUserId();
+        Long computerId = loginService.getSessions().get(session).getComputerId();
         Optional<UserPolicy> optionalUserPolicy = userPolicyRepository.findUserPolicyByUserId(userId);
+        Optional<ComputerPolicy> optionalComputerPolicy = computerPolicyRepository.findComputerPolicyByComputerId(computerId);
+        Policy policy = new Policy();
         if (optionalUserPolicy.isPresent()) {
             UserPolicy userPolicy = optionalUserPolicy.get();
-            Policy policy = new Policy();
-            policy.setId(userPolicy.getId());
-            policy.setName(userPolicy.getName());
             userPolicy.getBannedApps().
                     stream().
                     forEach(
@@ -83,13 +85,16 @@ public class UserPolicyServiceImpl implements UserPolicyService {
                     forEach(
                             site -> policy.getBannedSites().add(site.getValue())
                     );
-            userPolicy.getLoginMethods().
+        }
+        if (optionalComputerPolicy.isPresent()) {
+            ComputerPolicy computerPolicy = optionalComputerPolicy.get();
+            computerPolicy.getServices().
                     stream().
                     forEach(
-                            loginMethod -> policy.getLoginMethods().add(loginMethod.getValue())
+                            service -> policy.getBannedServices().add(service.getValue())
                     );
-            return policy;
+
         }
-        return null;
+        return policy;
     }
 }

@@ -16,9 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "service")
-public class Service extends ConfigElement {
+public class WindowsService extends ConfigElement {
 
-    public Service(@NotNull String label, @NotNull String value) {
+    public WindowsService(@NotNull String label, @NotNull String value) {
         super(label, value);
     }
 

@@ -48,6 +48,7 @@ export class AppNavbarHeader extends Component {
                         </NavDropdown>
                         <Nav.Link href="#/applications">Applications</Nav.Link>
                         <Nav.Link href="#/sites">Sites</Nav.Link>
+                        <Nav.Link href="#/services">Services</Nav.Link>
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2"/>

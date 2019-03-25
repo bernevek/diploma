@@ -1,5 +1,6 @@
 package com.diploma.DTO;
 
+import com.diploma.entity.BasePolicy;
 import com.diploma.entity.UserPolicy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,12 +11,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserPolicyForListDTO {
+public class PolicyForListDTO {
     private Long value;
     private String label;
 
-    public UserPolicyForListDTO(UserPolicy userPolicy) {
-        this.value = userPolicy.getId();
-        this.label = userPolicy.getName();
+    public PolicyForListDTO(BasePolicy basePolicy) {
+        this.value = basePolicy.getId();
+        this.label = basePolicy.getName();
     }
 }

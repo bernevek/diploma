@@ -104,11 +104,9 @@
 
     <xs:complexType name="policy">
         <xs:sequence>
-            <xs:element name="id" type="xs:long"/>
-            <xs:element name="name" type="xs:string"/>
             <xs:element name="bannedApps" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="bannedSites" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
-            <xs:element name="loginMethods" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="bannedServices" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -150,6 +148,23 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="apps" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--Services-->
+    <xs:element name="GetServicesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="session" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetServicesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="services" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "computer_policy")
 public class ComputerPolicy extends BasePolicy  {
 
-    public ComputerPolicy(@NotNull String name, List<Service> services) {
+    public ComputerPolicy(@NotNull String name, List<WindowsService> services) {
         super(name);
         this.services = services;
     }
@@ -26,7 +26,7 @@ public class ComputerPolicy extends BasePolicy  {
             joinColumns = { @JoinColumn(name = "policy_id") },
             inverseJoinColumns = { @JoinColumn(name = "service_id") }
     )
-    protected List<Service> services;
+    protected List<WindowsService> services;
 
     @OneToMany(mappedBy = "computerPolicy")
     private List<Computer> computers;

@@ -4,7 +4,7 @@ import computerPolicy from './computerPolicy';
 import userPolicy from './userPolicy';
 import applications from './applications';
 import sites from './sites';
-import loginMethods from './loginMethods';
+import services from './services';
 import users from './users';
 
 const appReducer = combineReducers({
@@ -12,7 +12,7 @@ const appReducer = combineReducers({
     userPolicy,
     applications,
     sites,
-    loginMethods,
+    services,
     users
 });
 const rootReducer = (state, action) => {

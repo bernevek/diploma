@@ -1,7 +1,6 @@
 package com.diploma.DTO;
 
 import com.diploma.entity.Application;
-import com.diploma.entity.LoginMethod;
 import com.diploma.entity.Site;
 import com.diploma.entity.UserPolicy;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,19 +18,16 @@ import java.util.stream.Collectors;
 public class UserPolicyDTO extends PolicyDTO {
     private List<ConfigElementDTO> bannedApps;
     private List<ConfigElementDTO> bannedSites;
-    private List<ConfigElementDTO> loginMethods;
-    private List<UserDTO> users;
+    private List<SimpleUserDTO> users;
     public UserPolicyDTO(Long id,
                          String name,
                          List<ConfigElementDTO> bannedApps,
                          List<ConfigElementDTO> bannedSites,
-                         List<ConfigElementDTO> loginMethods,
-                         List<UserDTO> users
+                         List<SimpleUserDTO> users
     ) {
         super(id, name);
         this.bannedApps = bannedApps;
         this.bannedSites = bannedSites;
-        this.loginMethods = loginMethods;
         this.users = users;
     }
 
@@ -47,12 +43,7 @@ public class UserPolicyDTO extends PolicyDTO {
                         stream().
                         map(site -> new ConfigElementDTO<>(site)).
                         collect(Collectors.toList());
-        this.loginMethods = userPolicy.
-                        getLoginMethods().
-                        stream().
-                        map(loginMethod -> new ConfigElementDTO<>(loginMethod)).
-                        collect(Collectors.toList());
-        this.users = userPolicy.getUsers().stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
+        this.users = userPolicy.getUsers().stream().map(user -> new SimpleUserDTO(user)).collect(Collectors.toList());
     }
 
     @JsonIgnore
@@ -65,10 +56,6 @@ public class UserPolicyDTO extends PolicyDTO {
                 this.getBannedSites().
                         stream().
                         map(configElementDTO -> (Site) configElementDTO.getConfigElement(new Site())).
-                        collect(Collectors.toList()),
-                this.getLoginMethods().
-                        stream().
-                        map(configElementDTO -> (LoginMethod) configElementDTO.getConfigElement(new LoginMethod())).
                         collect(Collectors.toList()));
         policy.setId(this.getId());
         return policy;

@@ -7,6 +7,7 @@ import UserPolicy from '../components/userPolicy';
 import app from '../App'
 import AppList from "../components/lists/appList";
 import SiteList from "../components/lists/siteList";
+import ServiceList from "../components/lists/serviceList";
 import UserList from "../components/lists/userList/index";
 import UserPolicyList from "../components/lists/userPolicyList";
 
@@ -20,6 +21,7 @@ class App extends Component {
                 <Route path="/userPolicy/:userPolicyId?" component={UserPolicy}/>
                 <Route path="/applications" component={AppList}/>
                 <Route path="/sites" component={SiteList}/>
+                <Route path="/services" component={ServiceList}/>
                 <Route path="/users" component={UserList}/>
                 <Route path="/userPolicies" component={UserPolicyList}/>
             </div>

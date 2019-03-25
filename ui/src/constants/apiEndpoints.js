@@ -76,7 +76,20 @@ export const deleteSiteUrl = (sitesId) => {
     return API_URL + "/site/" + sitesId;
 }
 
-/* Login methods*/
-export const getLoginMethodsUrl = () => {
-    return API_URL + "/loginMethod";
+/* Services */
+export const getServicesUrl = () => {
+    return API_URL + "/windowsService";
 }
+
+export const updateServiceUrl = () => {
+    return API_URL + "/windowsService";
+}
+
+export const addServiceUrl = () => {
+    return API_URL + "/windowsService";
+}
+
+export const deleteServiceUrl = (serviceId) => {
+    return API_URL + "/windowsService/" + serviceId;
+}
+

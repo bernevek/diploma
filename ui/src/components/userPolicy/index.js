@@ -1,14 +1,24 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
+import Select from 'react-select';
+import { Link } from "react-router-dom";
 import * as userPolicyActions from "../../actions/userPolicy"
-import Policy from "../policy";
+import * as applicationActions from "../../actions/applications";
+import * as siteActions from "../../actions/sites";
 
 export class UserPolicy extends Component {
     state = {
-        policy: null
+        policy: {
+            name: "",
+            bannedApps: [],
+            bannedSites: [],
+            users: []
+        }
     }
 
     componentDidMount() {
+        this.props.getApplications();
+        this.props.getSites();
         if (this.props.match.params.userPolicyId){
             this.getPolicy(this.props.match.params.userPolicyId);
         }
@@ -29,6 +39,33 @@ export class UserPolicy extends Component {
         this.props.getPolicy(policyId);
     }
 
+    setPolicyName = (name) => {
+        this.setState(prevState => ({
+            policy: {
+                ...prevState.policy,
+                name: name
+            }
+        }))
+    }
+
+    setBannedApps = (apps) => {
+        this.setState(prevState => ({
+            policy: {
+                ...prevState.policy,
+                bannedApps: apps
+            }
+        }))
+    }
+
+    setBannedSites = (sites) => {
+        this.setState(prevState => ({
+            policy: {
+                ...prevState.policy,
+                bannedSites: sites
+            }
+        }))
+    }
+
     savePolicy = () => {
         if (this.props.match.params.userPolicyId) {
             this.props.updatePolicy(this.state.policy);
@@ -39,48 +76,67 @@ export class UserPolicy extends Component {
 
     render() {
 
-        if (!this.state.policy && this.props.match.params.userPolicyId) {
+        if (!this.props.applications ||
+            !this.props.sites ||
+            (!this.state.policy.id && this.props.match.params.userPolicyId)) {
             return (
                 <div className="container">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
                 </div>
             )
         } else {
             return (
-                <Policy policyType = "User" policy={this.state.policy}
-                            setPolicyName={(name) => {
-                                this.setState(prevState => ({
-                                    policy: {
-                                        ...prevState.policy,
-                                        name: name
-                                    }
-                                }))
-                            }}
-                            setBannedApps={(apps) => {
-                                this.setState(prevState => ({
-                                    policy: {
-                                        ...prevState.policy,
-                                        bannedApps: apps
-                                    }
-                                }))
-                            }}
-                            setBannedSites={(sites) => {
-                                this.setState(prevState => ({
-                                    policy: {
-                                        ...prevState.policy,
-                                        bannedSites: sites
-                                    }
-                                }))
-                            }}
-                            setLoginMethods={(loginMethods) => {
-                                this.setState(prevState => ({
-                                    policy: {
-                                        ...prevState.policy,
-                                        loginMethods: loginMethods
-                                    }
-                                }))
-                            }}
-                            savePolicy={this.savePolicy}/>
+                <div className="container">
+                    <div>
+                        <h2>
+                            User policy:
+                            <input
+                                type="text"
+                                className="form-control"
+                                defaultValue={this.state.policy.name}
+                                onChange={(e) => {
+                                    this.setPolicyName(e.target.value);
+                                }}
+                                placeholder="Name"
+                            />
+                        </h2>
+                        <h3>Banned apps</h3>
+                        <Select isMulti options={this.props.applications}
+                                defaultValue={this.state.policy.bannedApps}
+                                onChange={(apps) => {
+                                    this.setBannedApps(apps);
+                                }}
+                        />
+                        <hr/>
+                        <h3>Banned sites</h3>
+                        <Select isMulti options={this.props.sites}
+                                defaultValue={this.state.policy.bannedSites}
+                                onChange={(sites) => {
+                                    this.setBannedSites(sites);
+                                }}
+                        />
+                        <hr/>
+                        <h3>Users</h3>
+                        {this.state.policy.users.map((item, i) => {
+                                return (<div key={i}>
+                                    <h4>{item.login}</h4>
+                                </div>)
+                            }
+                        )}
+                        <hr/>
+                    </div>
+                    <div>
+                        <Link className="btn btn-md btn-outline-primary" to="/userPolicies">Cancel</Link>
+                        &nbsp;
+                        <button
+                            type="button"
+                            className="btn btn-md btn-primary"
+                            onClick={this.savePolicy}
+                        >
+                            Save
+                        </button>
+                    </div>
+                </div>
             )
         }
     }
@@ -89,6 +145,8 @@ export class UserPolicy extends Component {
 const mapStateToProps = (state) => {
     return {
         policy: state.userPolicy.userPolicy,
+        applications: state.applications.applications,
+        sites: state.sites.sites
     }
 }
 
@@ -102,6 +160,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         addPolicy: (policy) => {
             dispatch(userPolicyActions.addUserPolicy(policy));
+        },
+        getApplications: () => {
+            dispatch(applicationActions.getApplications())
+        },
+        getSites: () => {
+            dispatch(siteActions.getSites())
         }
     }
 }
