@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("")
-    ResponseEntity<?> getApplications() {
+    ResponseEntity<?> getUsers() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 }

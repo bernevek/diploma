@@ -25,7 +25,28 @@ export const deleteUserPolicyUrl = (policyId) => {
     return API_URL + "/userPolicy/" + policyId;
 }
 
-/* Applications */
+/* Computer Policy */
+export const getComputerPoliciesUrl = () => {
+    return API_URL + "/computerPolicies";
+}
+
+export const getComputerPolicyUrl = (policyId) => {
+    return API_URL + "/computerPolicy/" + policyId;
+}
+
+export const updateComputerPolicyUrl = () => {
+    return API_URL + "/computerPolicy";
+}
+
+export const addComputerPolicyUrl = () => {
+    return API_URL + "/computerPolicy";
+}
+
+export const deleteComputerPolicyUrl = (policyId) => {
+    return API_URL + "/computerPolicy/" + policyId;
+}
+
+/* Users */
 export const getUsersUrl = () => {
     return API_URL + "/user";
 }
@@ -38,8 +59,21 @@ export const addUserUrl = () => {
     return API_URL + "/user";
 }
 
-export const deleteUserUrl = (applicationId) => {
-    return API_URL + "/user/" + applicationId;
+export const deleteUserUrl = (userId) => {
+    return API_URL + "/user/" + userId;
+}
+
+/* Computers */
+export const getComputersUrl = () => {
+    return API_URL + "/computer";
+}
+
+export const updateComputerUrl = () => {
+    return API_URL + "/computer";
+}
+
+export const deleteComputerUrl = (computerId) => {
+    return API_URL + "/computer/" + computerId;
 }
 
 /* Applications */

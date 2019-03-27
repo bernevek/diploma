@@ -78,12 +78,14 @@ export default function orgs(state = initialState, action={}) {
             return {
                 ...state,
                 errorMsg: null,
-                users: [...state.users.map(app => {
-                    if (app.id === action.response.data.id) {
-                        app.label = action.response.data.label;
-                        app.value = action.response.data.value;
+                users: [...state.users.map(user => {
+                    if (user.id === action.response.data.id) {
+                        user.login = action.response.data.login;
+                        user.password = action.response.data.password;
+                        user.userPolicyId = action.response.data.userPolicyId;
+                        user.computerId = action.response.data.computerId;
                     }
-                    return app;
+                    return user;
                 })],
                 updateUserInProgress: false,
             };

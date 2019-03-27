@@ -43,17 +43,17 @@ export class AppNavbarHeader extends Component {
                             <NavDropdown.Item href="#/userPolicies">User policies</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Computer" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#">Computers</NavDropdown.Item>
-                            <NavDropdown.Item href="#/computerPolicy">Computer policies</NavDropdown.Item>
+                            <NavDropdown.Item href="#/computers">Computers</NavDropdown.Item>
+                            <NavDropdown.Item href="#/computerPolicies">Computer policies</NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link href="#/applications">Applications</Nav.Link>
                         <Nav.Link href="#/sites">Sites</Nav.Link>
                         <Nav.Link href="#/services">Services</Nav.Link>
                     </Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2"/>
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
+                    {/*<Form inline>*/}
+                        {/*<FormControl type="text" placeholder="Search" className="mr-sm-2"/>*/}
+                        {/*<Button variant="outline-success">Search</Button>*/}
+                    {/*</Form>*/}
                 </Navbar.Collapse>
             </Navbar>
         );

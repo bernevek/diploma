@@ -51,8 +51,7 @@ public class ComputerServiceImpl implements ComputerService{
 
     @Override
     public ComputerDTO saveComputer(ComputerDTO computerDTO) {
-        Computer computer = new Computer();
-        computer.setId(computerDTO.getId());
+        Computer computer = computerRepository.getOne(computerDTO.getId());
         if (computerDTO.getComputerPolicyId() != null) {
             computer.setComputerPolicy(computerPolicyRepository.getOne(computerDTO.getComputerPolicyId()));
         }

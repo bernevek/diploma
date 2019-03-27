@@ -10,6 +10,8 @@ import SiteList from "../components/lists/siteList";
 import ServiceList from "../components/lists/serviceList";
 import UserList from "../components/lists/userList/index";
 import UserPolicyList from "../components/lists/userPolicyList";
+import ComputerPolicyList from "../components/lists/computerPolicyList";
+import ComputerList from "../components/lists/computerList";
 
 class App extends Component {
     render() {
@@ -23,7 +25,9 @@ class App extends Component {
                 <Route path="/sites" component={SiteList}/>
                 <Route path="/services" component={ServiceList}/>
                 <Route path="/users" component={UserList}/>
+                <Route path="/computers" component={ComputerList}/>
                 <Route path="/userPolicies" component={UserPolicyList}/>
+                <Route path="/computerPolicies" component={ComputerPolicyList}/>
             </div>
         );
     }
