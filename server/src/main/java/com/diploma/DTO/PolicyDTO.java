@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PolicyDTO {
-    private Long id;
-    private String name;
+  private Long id;
+  private String name;
 }

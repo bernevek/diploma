@@ -17,21 +17,23 @@ import java.util.stream.Collectors;
 @Service
 public class SiteServiceImpl implements SiteService {
 
-    @Autowired
-    SiteRepository siteRepository;
+  @Autowired SiteRepository siteRepository;
 
-    @Override
-    public ConfigElementDTO saveSite(ConfigElementDTO site) {
-        return new ConfigElementDTO<Site>(siteRepository.save((Site) site.getConfigElement(new Site())));
-    }
+  @Override
+  public ConfigElementDTO saveSite(ConfigElementDTO site) {
+    return new ConfigElementDTO<Site>(
+        siteRepository.save((Site) site.getConfigElement(new Site())));
+  }
 
-    @Override
-    public void deleteSite(Long siteId) {
-        siteRepository.deleteById(siteId);
-    }
+  @Override
+  public void deleteSite(Long siteId) {
+    siteRepository.deleteById(siteId);
+  }
 
-    @Override
-    public List<ConfigElementDTO> getSites() {
-        return siteRepository.findAll().stream().map(site -> new ConfigElementDTO<>(site)).collect(Collectors.toList());
-    }
+  @Override
+  public List<ConfigElementDTO> getSites() {
+    return siteRepository.findAll().stream()
+        .map(site -> new ConfigElementDTO<>(site))
+        .collect(Collectors.toList());
+  }
 }

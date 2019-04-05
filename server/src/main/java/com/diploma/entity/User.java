@@ -1,11 +1,15 @@
 package com.diploma.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -14,18 +18,18 @@ import javax.validation.constraints.NotNull;
 @Table(name = "user")
 public class User extends AbstractIdentifiableEntity {
 
-    @NotNull
-    @Column(name = "login", nullable = false, unique = true)
-    private String login;
+  @NotNull
+  @Column(name = "login", nullable = false, unique = true)
+  private String login;
 
-    @NotNull
-    @Column(name = "password", nullable = false)
-    private String password;
+  @NotNull
+  @Column(name = "password", nullable = false)
+  private String password;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private UserPolicy userPolicy;
+  @NotNull
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  private UserPolicy userPolicy;
 
-    @OneToOne(mappedBy = "computersOwner")
-    private Computer computer;
+  @OneToOne(mappedBy = "computersOwner")
+  private Computer computer;
 }

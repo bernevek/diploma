@@ -1,13 +1,16 @@
 package com.diploma.entity;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Getter
 @Setter
@@ -16,10 +19,10 @@ import java.util.List;
 @Table(name = "application")
 public class Application extends ConfigElement {
 
-    public Application(@NotNull String label, @NotNull String value) {
-        super(label, value);
-    }
+  public Application(@NotNull String label, @NotNull String value) {
+    super(label, value);
+  }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "bannedApps")
-    private List<UserPolicy> policies;
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "bannedApps")
+  private List<UserPolicy> policies;
 }

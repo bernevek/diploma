@@ -11,22 +11,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConfigElementDTO <T extends ConfigElement> {
-    private Long id;
-    private String label;
-    private String value;
+public class ConfigElementDTO<T extends ConfigElement> {
+  private Long id;
+  private String label;
+  private String value;
 
-    public ConfigElementDTO (ConfigElement configElement) {
-        this.id = configElement.getId();
-        this.label = configElement.getLabel();
-        this.value = configElement.getValue();
-    }
+  public ConfigElementDTO(ConfigElement configElement) {
+    this.id = configElement.getId();
+    this.label = configElement.getLabel();
+    this.value = configElement.getValue();
+  }
 
-    @JsonIgnore
-    public T getConfigElement(T configElement) {
-        configElement.setId(this.id);
-        configElement.setLabel(this.label);
-        configElement.setValue(this.value);
-        return configElement;
-    }
+  @JsonIgnore
+  public T getConfigElement(T configElement) {
+    configElement.setId(this.id);
+    configElement.setLabel(this.label);
+    configElement.setValue(this.value);
+    return configElement;
+  }
 }

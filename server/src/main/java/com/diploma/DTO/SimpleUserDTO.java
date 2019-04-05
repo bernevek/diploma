@@ -11,11 +11,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SimpleUserDTO {
-    private Long id;
-    private String login;
+  private Long id;
+  private String login;
 
-    public SimpleUserDTO(User user) {
-        this.id = user.getId();
-        this.login = user.getLogin();
-    }
+  public SimpleUserDTO(User user) {
+    this.id = user.getId();
+    this.login = user.getLogin();
+  }
 }

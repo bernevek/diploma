@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface UserPolicyRepository extends JpaRepository<UserPolicy, Long> {
-    @Query("SELECT up FROM UserPolicy up JOIN up.users u WHERE u.id=?1")
-    Optional<UserPolicy> findUserPolicyByUserId(Long id);
+  @Query("SELECT up FROM UserPolicy up JOIN up.users u WHERE u.id=?1")
+  Optional<UserPolicy> findUserPolicyByUserId(Long id);
 }

@@ -7,8 +7,11 @@ import localhost._8080.isecurity.ComputerDetails;
 import java.util.List;
 
 public interface ComputerService {
-    ComputerDetails saveComputer(ComputerDetails computerDetails);
-    ComputerDTO saveComputer(ComputerDTO computerDTO);
-    void deleteComputer(Long computerId);
-    List<ComputerDTO> getComputers();
+  ComputerDetails saveComputer(ComputerDetails computerDetails);
+
+  ComputerDTO saveComputer(ComputerDTO computerDTO);
+
+  void deleteComputer(Long computerId);
+
+  List<ComputerDTO> getComputers();
 }

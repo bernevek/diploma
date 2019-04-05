@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface ComputerPolicyRepository extends JpaRepository<ComputerPolicy, Long> {
-    @Query("SELECT cp FROM ComputerPolicy cp JOIN cp.computers c WHERE c.id=?1")
-    Optional<ComputerPolicy> findComputerPolicyByComputerId(Long id);
+  @Query("SELECT cp FROM ComputerPolicy cp JOIN cp.computers c WHERE c.id=?1")
+  Optional<ComputerPolicy> findComputerPolicyByComputerId(Long id);
 }

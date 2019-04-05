@@ -11,13 +11,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SimpleComputerDTO {
-    private Long id;
-    private Long localId;
-    private String computerName;
+  private Long id;
+  private Long localId;
+  private String computerName;
 
-    public SimpleComputerDTO(Computer computer) {
-        this.id = computer.getId();
-        this.localId = computer.getLocalId();
-        this.computerName = computer.getComputerName();
-    }
+  public SimpleComputerDTO(Computer computer) {
+    this.id = computer.getId();
+    this.localId = computer.getLocalId();
+    this.computerName = computer.getComputerName();
+  }
 }

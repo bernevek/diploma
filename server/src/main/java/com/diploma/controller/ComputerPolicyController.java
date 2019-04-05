@@ -5,40 +5,47 @@ import com.diploma.service.ComputerPolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
 public class ComputerPolicyController {
 
-    @Autowired
-    ComputerPolicyService computerPolicyService;
+  @Autowired ComputerPolicyService computerPolicyService;
 
-    @GetMapping("/computerPolicies")
-    ResponseEntity<?> getComputerPolicies() {
-        return new ResponseEntity<>(computerPolicyService.getComputerPolicies(), HttpStatus.OK);
-    }
+  @GetMapping("/computerPolicies")
+  ResponseEntity<?> getComputerPolicies() {
+    return new ResponseEntity<>(computerPolicyService.getComputerPolicies(), HttpStatus.OK);
+  }
 
-    @GetMapping("/computerPolicy/{computerPolicyId}")
-    ResponseEntity<?> getComputerPolicy(@PathVariable Long computerPolicyId) {
-        return new ResponseEntity<>(computerPolicyService.getComputerPolicy(computerPolicyId), HttpStatus.OK);
-    }
+  @GetMapping("/computerPolicy/{computerPolicyId}")
+  ResponseEntity<?> getComputerPolicy(@PathVariable Long computerPolicyId) {
+    return new ResponseEntity<>(
+        computerPolicyService.getComputerPolicy(computerPolicyId), HttpStatus.OK);
+  }
 
-    @PostMapping("/computerPolicy")
-    ResponseEntity<?> addComputerPolicy(@RequestBody ComputerPolicyDTO computerPolicyDTO) {
-        computerPolicyService.saveComputerPolicy(computerPolicyDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+  @PostMapping("/computerPolicy")
+  ResponseEntity<?> addComputerPolicy(@RequestBody ComputerPolicyDTO computerPolicyDTO) {
+    computerPolicyService.saveComputerPolicy(computerPolicyDTO);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
 
-    @PutMapping("/computerPolicy")
-    ResponseEntity<?> editComputerPolicy(@RequestBody ComputerPolicyDTO computerPolicyDTO) {
-        computerPolicyService.saveComputerPolicy(computerPolicyDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+  @PutMapping("/computerPolicy")
+  ResponseEntity<?> editComputerPolicy(@RequestBody ComputerPolicyDTO computerPolicyDTO) {
+    computerPolicyService.saveComputerPolicy(computerPolicyDTO);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
 
-    @DeleteMapping("/computerPolicy/{computerPolicyId}")
-    ResponseEntity<?> deleteComputerPolicy(@PathVariable Long computerPolicyId) {
-        computerPolicyService.deleteComputerPolicy(computerPolicyId);
-        return new ResponseEntity<>(computerPolicyId, HttpStatus.OK);
-    }
+  @DeleteMapping("/computerPolicy/{computerPolicyId}")
+  ResponseEntity<?> deleteComputerPolicy(@PathVariable Long computerPolicyId) {
+    computerPolicyService.deleteComputerPolicy(computerPolicyId);
+    return new ResponseEntity<>(computerPolicyId, HttpStatus.OK);
+  }
 }
