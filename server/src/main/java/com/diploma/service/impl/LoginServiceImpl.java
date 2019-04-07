@@ -1,21 +1,26 @@
 package com.diploma.service.impl;
 
+import com.diploma.entity.Computer;
 import com.diploma.entity.User;
+import com.diploma.repository.ComputerRepository;
 import com.diploma.repository.UserRepository;
 import com.diploma.service.LoginService;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
+import com.diploma.service.ReportService;
 import java.time.Instant;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import javax.annotation.PostConstruct;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Getter
 @Setter
@@ -24,19 +29,24 @@ public class LoginServiceImpl implements LoginService {
 
   @Autowired private UserRepository userRepository;
 
+  @Autowired private ComputerRepository computerRepository;
+
+  @Autowired private ReportService reportService;
+
   private ConcurrentMap<String, Ids> sessions = new ConcurrentHashMap<>();
 
   @PostConstruct
   public void initSessionCleaner() {
     Timer time = new Timer();
-    SessionCleaner sessionCleaner = new SessionCleaner(sessions);
+    SessionCleaner sessionCleaner = new SessionCleaner(sessions, reportService);
     time.schedule(sessionCleaner, 0, 300000);
   }
 
   @Override
   public String loginPcUser(Long computerId, String login, String password) {
     User user = userRepository.getUserByLoginAndPassword(login, password);
-    if (user != null) {
+    Optional<Computer> computerOptional = computerRepository.findById(computerId);
+    if (user != null && computerOptional.isPresent()) {
       String session = UUID.randomUUID().toString();
       Ids ids = new Ids(user.getId(), computerId, Instant.now().plusSeconds(300));
       if (sessions.containsValue(ids)) {
@@ -44,6 +54,7 @@ public class LoginServiceImpl implements LoginService {
             .filter(stringIdsEntry -> !stringIdsEntry.getValue().equals(ids));
       }
       sessions.put(session, ids);
+      reportService.addNewReport(user, computerOptional.get());
       return session;
     } else {
       return "";
@@ -52,6 +63,8 @@ public class LoginServiceImpl implements LoginService {
 
   public String logoutPcUser(String session) {
     if (sessions.containsKey(session)) {
+      Ids ids = sessions.get(session);
+      reportService.closeReport(ids.getUserId(), ids.getComputerId());
       sessions.remove(session);
     }
     return "OK";
