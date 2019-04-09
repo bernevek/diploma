@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import NavDropdown from "react-bootstrap/NavDropdown"
 import { history } from '../../store'
+require('bootstrap/dist/css/bootstrap.css');
 
 
 export class AppNavbarHeader extends Component {
@@ -49,6 +50,7 @@ export class AppNavbarHeader extends Component {
                         <Nav.Link href="#/applications">Applications</Nav.Link>
                         <Nav.Link href="#/sites">Sites</Nav.Link>
                         <Nav.Link href="#/services">Services</Nav.Link>
+                        <Nav.Link href="#/reports">Reports</Nav.Link>
                     </Nav>
                     {/*<Form inline>*/}
                         {/*<FormControl type="text" placeholder="Search" className="mr-sm-2"/>*/}

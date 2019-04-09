@@ -7,6 +7,7 @@ import sites from './sites';
 import services from './services';
 import users from './users';
 import computers from './computers';
+import reports from './reports';
 
 const appReducer = combineReducers({
     computerPolicy,
@@ -15,7 +16,8 @@ const appReducer = combineReducers({
     sites,
     services,
     users,
-    computers
+    computers,
+    reports
 });
 const rootReducer = (state, action) => {
     if(action.type === 'LOGOUT'){

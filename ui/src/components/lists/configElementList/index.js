@@ -31,7 +31,7 @@ export class ConfigElementList extends Component {
         if (!this.props.configElements) {
             return (
                 <div className="container">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
+                    <img alt="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
                 </div>
             )
         } else {

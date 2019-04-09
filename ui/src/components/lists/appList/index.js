@@ -13,6 +13,7 @@ export class AppList extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        debugger
         if(this.props.applications !== prevProps.applications) {
             this.setState({
                 applications: this.props.applications

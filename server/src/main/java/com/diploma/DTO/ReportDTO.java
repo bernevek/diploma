@@ -11,12 +11,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReportDTO {
+  private Long id;
   private String userName;
   private String computerName;
   private String loginTime;
   private String logoutTime;
 
   public ReportDTO(Report report) {
+    this.id = report.getId();
     this.userName = report.getUser().getLogin();
     this.computerName = report.getComputer().getComputerName();
     this.loginTime = report.getLoginTime().toString();

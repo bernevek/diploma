@@ -127,3 +127,7 @@ export const deleteServiceUrl = (serviceId) => {
     return API_URL + "/windowsService/" + serviceId;
 }
 
+/* Reports */
+export const getReportsUrl = () => {
+    return API_URL + "/report";
+}

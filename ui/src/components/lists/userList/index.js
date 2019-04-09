@@ -82,7 +82,7 @@ export class UserList extends Component {
         if (!this.state.users || !this.state.policies) {
             return (
                 <div className="container">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
+                    <img alt="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
                 </div>
             )
         } else {

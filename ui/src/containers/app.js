@@ -12,6 +12,7 @@ import UserList from "../components/lists/userList/index";
 import UserPolicyList from "../components/lists/userPolicyList";
 import ComputerPolicyList from "../components/lists/computerPolicyList";
 import ComputerList from "../components/lists/computerList";
+import ReportList from "../components/lists/reportList";
 
 class App extends Component {
     render() {
@@ -28,6 +29,7 @@ class App extends Component {
                 <Route path="/computers" component={ComputerList}/>
                 <Route path="/userPolicies" component={UserPolicyList}/>
                 <Route path="/computerPolicies" component={ComputerPolicyList}/>
+                <Route path="/reports" component={ReportList}/>
             </div>
         );
     }
