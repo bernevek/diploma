@@ -5,6 +5,8 @@ import * as computersActions from "../../../actions/computers"
 import * as usersActions from "../../../actions/users"
 import {ReportItem} from "./reportItem/index";
 import Select from "react-select";
+import "../../../../node_modules/react-datetime/css/react-datetime.css"
+import Datetime from 'react-datetime';
 
 export class ReportList extends Component {
     state = {
@@ -39,23 +41,21 @@ export class ReportList extends Component {
     }
 
     setLoginTime = (time) => {
-        console.log(time);
-        // this.setState(prevState => ({
-        //     reportFilter: {
-        //         ...prevState.reportFilter,
-        //         computerId: computer.value
-        //     }
-        // }));
+        this.setState(prevState => ({
+            reportFilter: {
+                ...prevState.reportFilter,
+                loginTime: time.format("YYYY-MM-DDTHH:mm:ss[Z]")
+            }
+        }));
     }
 
     setLogoutTime = (time) => {
-        console.log(time);
-        // this.setState(prevState => ({
-        //     reportFilter: {
-        //         ...prevState.reportFilter,
-        //         computerId: computer.value
-        //     }
-        // }));
+        this.setState(prevState => ({
+            reportFilter: {
+                ...prevState.reportFilter,
+                logoutTime: time.format("YYYY-MM-DDTHH:mm:ss[Z]")
+            }
+        }));
     }
 
     getComputers = () => {
@@ -90,32 +90,52 @@ export class ReportList extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-md-2 col-xl-2 col-lg-2 col-sm-2 col-2">
-                                    <Select options={this.props.users.map(user => {
-                                                return {
-                                                    label: user.login,
-                                                    value: user.id
-                                                }
-                                            })}
-                                            onChange={(user) => {
-                                                this.setUserId(user);
-                                            }}
+                                    <Select
+                                        placeholder={"User"}
+                                        options={this.props.users.map(user => {
+                                            return {
+                                                label: user.login,
+                                                value: user.id
+                                            }
+                                        })}
+                                        onChange={(user) => {
+                                            this.setUserId(user);
+                                        }}
                                     />
                                 </div>
                                 <div className="col-md-2 col-xl-2 col-lg-2 col-sm-2 col-2">
-                                    <Select options={this.props.computers.map(computer => {
-                                                return {
-                                                    label: computer.computerName,
-                                                    value: computer.id
-                                                }
-                                            })}
-                                            onChange={(computer) => {
-                                                this.setComputerId(computer);
-                                            }}
+                                    <Select
+                                        placeholder={"Computer"}
+                                        options={this.props.computers.map(computer => {
+                                            return {
+                                                label: computer.computerName,
+                                                value: computer.id
+                                            }
+                                        })}
+                                        onChange={(computer) => {
+                                            this.setComputerId(computer);
+                                        }}
                                     />
                                 </div>
                                 <div className="col-md-2 col-xl-2 col-lg-2 col-sm-2 col-2">
+                                    <Datetime
+                                        isValidDate={(time)=> {
+                                            if (this.state.reportFilter.logoutTime) {
+                                                return time < new Date(this.state.reportFilter.logoutTime)
+                                            } else {
+                                                return time < new Date().getTime()
+                                            }
+                                        }}
+                                        inputProps={{ placeholder: "Login time"}}
+                                        onChange={this.setLoginTime}
+                                    />
                                 </div>
                                 <div className="col-md-2 col-xl-2 col-lg-2 col-sm-2 col-2">
+                                    <Datetime
+                                        isValidDate={(time)=> time < new Date().getTime()}
+                                        inputProps={{ placeholder: "Logout time"}}
+                                        onChange={this.setLogoutTime}
+                                    />
                                 </div>
                                 <div className="col-md-1 col-xl-1 col-lg-1 col-sm-1 col-1">
                                     {this.state.reportFilter.userId && this.state.reportFilter.computerId ? (
