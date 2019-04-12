@@ -84,6 +84,7 @@ export class ConfigElementItem extends Component {
                                 >
                                     Update
                                 </button>
+                                &nbsp;
                                 <button
                                     type="button"
                                     className="btn btn-md btn-outline-primary"
@@ -110,6 +111,7 @@ export class ConfigElementItem extends Component {
                                 >
                                     Edit
                                 </button>
+                                &nbsp;
                                 <button
                                     type="button"
                                     className="btn btn-md btn-danger"

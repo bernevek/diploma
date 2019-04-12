@@ -124,6 +124,7 @@ export class UserItem extends Component {
                                     >
                                         Update
                                     </button>
+                                    &nbsp;
                                     <button
                                         type="button"
                                         className="btn btn-md btn-outline-primary"
@@ -150,6 +151,7 @@ export class UserItem extends Component {
                                     >
                                         Edit
                                     </button>
+                                    &nbsp;
                                     <button
                                         type="button"
                                         className="btn btn-md btn-danger"

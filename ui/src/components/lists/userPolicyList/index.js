@@ -52,6 +52,7 @@ export class UserPolicyList extends Component {
                                         {this.state.policies.map((policy, i) => {
                                             return (
                                                 <div key={i}>
+                                                    <br/>
                                                     <UserPolicyItem
                                                         item={policy}
                                                         deleteItem={this.deletePolicy}/>

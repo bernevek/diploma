@@ -78,6 +78,7 @@ export class ConfigElementList extends Component {
                                         {this.props.configElements.map((configElement, i) => {
                                             return (
                                                 <div key={i}>
+                                                    <br/>
                                                     <ConfigElementItem
                                                         item={configElement}
                                                         updateItem={this.props.updateItem}

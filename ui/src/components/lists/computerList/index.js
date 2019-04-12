@@ -74,6 +74,7 @@ export class ComputerList extends Component {
                                         {this.state.computers.map((computer, i) => {
                                             return (
                                                 <div key={i}>
+                                                    <br/>
                                                     <ComputerItem
                                                         item={computer}
                                                         policies={this.state.policies}

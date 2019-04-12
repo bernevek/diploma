@@ -139,6 +139,7 @@ export class UserList extends Component {
                                         {this.state.users.map((user, i) => {
                                             return (
                                                 <div key={i}>
+                                                    <br/>
                                                     <UserItem
                                                         item={user}
                                                         policies={this.state.policies}

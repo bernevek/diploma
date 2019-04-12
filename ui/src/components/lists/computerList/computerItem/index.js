@@ -39,6 +39,7 @@ export class ComputerItem extends Component {
                                     this.changePolicy(policy);
                                 }}
                             />
+                            &nbsp;
                         </div>
                         <div className="col-md-2 col-xl-2 col-lg-2 col-sm-2 col-2">
                             <button

@@ -164,6 +164,7 @@ export class ReportList extends Component {
                                             this.props.reports.map((report, i) => {
                                                 return (
                                                     <div key={i}>
+                                                        <br/>
                                                         <ReportItem
                                                             item={report}
                                                         />
