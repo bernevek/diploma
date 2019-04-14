@@ -32,7 +32,6 @@ public class ComputerServiceImpl implements ComputerService {
       computer.setComputerName(computerDetails.getComputerName());
       computer.setLocalUserName(computerDetails.getLocalUserName());
       computer.setIp(computerDetails.getIp());
-      computer.setComputerPolicy(computerPolicy);
       computerRepository.save(computer);
       computerDetails.setServerId(computer.getId());
     } else {
