@@ -57,13 +57,15 @@ public class ReportServiceImpl implements ReportService {
 
   @Override
   public void closeReport(Long userId, Long computerId) {
-    Optional<Report> reportOptional =
+    Optional<List<Report>> reportOptional =
         reportRepository.findReportByUserIdAndComputerIdAndLogoutTimeIsNull(userId, computerId);
-    Report report = null;
+    List<Report> reports = null;
     if (reportOptional.isPresent()) {
-      report = reportOptional.get();
-      report.setLogoutTime(Instant.now());
-      reportRepository.save(report);
+      reports = reportOptional.get();
+      for (Report report : reports) {
+        report.setLogoutTime(Instant.now());
+      }
+      reportRepository.saveAll(reports);
     }
   }
 }

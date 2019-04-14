@@ -12,9 +12,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface ReportRepository extends JpaRepository<Report, Long> {
   @Query(
-      "SELECT DISTINCT rep FROM Report rep JOIN rep.user u JOIN rep.computer c " +
+      "SELECT rep FROM Report rep JOIN rep.user u JOIN rep.computer c " +
       "WHERE u.id=:userId and c.id=:computerId and rep.logoutTime is null")
-  Optional<Report> findReportByUserIdAndComputerIdAndLogoutTimeIsNull(
+  Optional<List<Report>> findReportByUserIdAndComputerIdAndLogoutTimeIsNull(
       @Param("userId") Long userId,
       @Param("computerId") Long computerId
   );
