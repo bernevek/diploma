@@ -22,7 +22,8 @@ public class ReportDTO {
     this.userName = report.getUser().getLogin();
     this.computerName = report.getComputer().getComputerName();
     this.loginTime = report.getLoginTime().toString();
-    this.logoutTime = report.getLogoutTime().toString();
+    if (report.getLogoutTime() != null) {
+      this.logoutTime = report.getLogoutTime().toString();
+    }
   }
-
 }
